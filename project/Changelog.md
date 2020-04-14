@@ -1,3 +1,14 @@
+## V.0.0.3 April 13, 2020
+
+**Changes**
+
+-Finished sidebar.
+
+**Added**
+
+-   Constant with sizes.
+-   Components MarginWrapper, UnderlineBtn, StyledH1.
+
 ## V.0.0.2 April 12, 2020
 
 **Added**

@@ -1,12 +1,18 @@
 import React, { FC } from 'react';
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
-import Colors from '../../constants/colors';
+import UnderlineBtn from '../atoms/UnderlineBtn';
+import Colors from '../../constants/allColors';
+import StyledH1 from '../atoms/Typography/StyledH1';
+import MarginWrapper from '../atoms/Utilities/MarginWrapper';
 
 const Wrapper = styled.div`
     display: flex;
     height: 10vh;
     min-width: 100vw;
     background-color: ${Colors.secodary};
+    align-items: center;
+    justify-content: space-between;
 `;
 
 interface ISidebar {}
@@ -14,8 +20,18 @@ interface ISidebar {}
 const Sidebar: FC<ISidebar> = (props) => {
     return (
         <Wrapper>
+            <MarginWrapper left={10}>
+                <NavLink to="/" style={{ textDecoration: 'none' }}>
+                    <StyledH1>Note Up!</StyledH1>
+                </NavLink>
+            </MarginWrapper>
             <ul>
-                <li>Hi</li>
+                <NavLink to="/Dashboards">
+                    <UnderlineBtn onClickFn={() => {}}>Dashboards</UnderlineBtn>
+                </NavLink>
+                <NavLink to="/LogIn">
+                    <UnderlineBtn onClickFn={() => {}}>Log In</UnderlineBtn>
+                </NavLink>
             </ul>
         </Wrapper>
     );

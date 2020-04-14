@@ -4,4 +4,5 @@ export default {
     tertiary: '#87919E',
     light: '#DAECF7',
     dark: '#2D2A32',
+    pinkish: '#F7567C',
 };
