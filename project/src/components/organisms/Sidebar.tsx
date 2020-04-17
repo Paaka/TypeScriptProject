@@ -13,6 +13,7 @@ const Wrapper = styled.div`
     background-color: ${Colors.secodary};
     align-items: center;
     justify-content: space-between;
+    border-bottom: 2px solid ${Colors.dark};
 `;
 
 interface ISidebar {}
@@ -25,14 +26,14 @@ const Sidebar: FC<ISidebar> = (props) => {
                     <StyledH1>Note Up!</StyledH1>
                 </NavLink>
             </MarginWrapper>
-            <ul>
+            <div>
                 <NavLink to="/Dashboards">
                     <UnderlineBtn onClickFn={() => {}}>Dashboards</UnderlineBtn>
                 </NavLink>
                 <NavLink to="/LogIn">
                     <UnderlineBtn onClickFn={() => {}}>Log In</UnderlineBtn>
                 </NavLink>
-            </ul>
+            </div>
         </Wrapper>
     );
 };
