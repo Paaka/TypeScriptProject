@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
-import UnderlineBtn from '../atoms/UnderlineBtn';
+import UnderlineBtn from '../atoms/Buttons/UnderlineBtn';
 import Colors from '../../constants/allColors';
 import StyledH1 from '../atoms/Typography/StyledH1';
 import MarginWrapper from '../atoms/Utilities/MarginWrapper';

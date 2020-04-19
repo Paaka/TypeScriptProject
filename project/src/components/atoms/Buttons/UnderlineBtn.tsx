@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import Colors from '../../constants/allColors';
-import Sizes from '../../constants/Sizes';
+import Colors from '../../../constants/allColors';
+import Sizes from '../../../constants/Sizes';
 
 interface IUnderlineBtn {
     onClickFn(): Function | void;

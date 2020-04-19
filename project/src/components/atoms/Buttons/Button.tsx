@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import allColors from '../../constants/allColors';
+import allColors from '../../../constants/allColors';
 
 const Button = styled.div`
     background-color: ${allColors.pinkish};
@@ -7,6 +7,10 @@ const Button = styled.div`
     font-family: Arial, Helvetica, sans-serif;
     font-size: 1.2rem;
     padding: 5px 15px;
+    border-radius: 5px;
+    width: 80%;
+    flex: none;
+    height: 2rem;
 `;
 
 export default Button;

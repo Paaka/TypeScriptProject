@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import Button from '../../components/atoms/Button';
+import Button from '../atoms/Buttons/Button';
 import allColors from '../../constants/allColors';
 import Sizes from '../../constants/Sizes';
+import MainInput from '../atoms/MainInput';
+import ButtonIcon from '../atoms/Buttons/ButtonIcon';
 
 const Column = styled.div`
     height: 100%;
@@ -17,7 +19,7 @@ interface IStyledButton {
 const StyledButton = styled.div<IStyledButton>`
     cursor: pointer;
     width: 200px;
-    height: ${(props) => (props.isFormOpen ? '10rem' : '2rem')};
+    height: ${(props) => (props.isFormOpen ? '6rem' : '2rem')};
     display: flex;
     justify-content: center;
     align-items: center;
@@ -45,23 +47,57 @@ const StyledText = styled.p`
     font-size: ${Sizes.L};
 `;
 
+const RowWrapper = styled.div`
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 5px;
+`;
+
+const Wrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`;
+
 const FormForList = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const [inputedText, setInputedText] = useState('');
 
     const onClickHandler = () => {
         setIsOpen(!isOpen);
+        setInputedText('');
+    };
+
+    const onTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setInputedText(e.target.value);
+    };
+
+    const addListHandler = () => {
+        console.log(inputedText);
+        onClickHandler();
     };
 
     return (
         <Column>
             <StyledButton isFormOpen={isOpen}>
                 {isOpen ? (
-                    <div>
-                        <input type="text"></input>
-                        <div>
-                            <Button onClick={onClickHandler}>Add List</Button>
-                        </div>
-                    </div>
+                    <Wrapper>
+                        <MainInput
+                            value={inputedText}
+                            onChange={onTextChange}
+                            isForm
+                            type="text"
+                        ></MainInput>
+                        <RowWrapper>
+                            <Button onClick={addListHandler}>Add List</Button>
+                            <ButtonIcon
+                                iconPath={require('../../assets/SVGs/error.svg')}
+                                onClickFn={onClickHandler}
+                            />
+                        </RowWrapper>
+                    </Wrapper>
                 ) : (
                     <div onClick={onClickHandler}>
                         <StyledText>+ Add new list</StyledText>
