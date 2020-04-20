@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
+import { addList } from '../../actions/index';
 
 import Button from '../atoms/Buttons/Button';
 import allColors from '../../constants/allColors';
@@ -8,8 +10,8 @@ import MainInput from '../atoms/MainInput';
 import ButtonIcon from '../atoms/Buttons/ButtonIcon';
 
 const Column = styled.div`
-    height: 100%;
-    width: 100%;
+    height: 90vh;
+    width: 24vw;
 `;
 
 interface IStyledButton {
@@ -62,6 +64,7 @@ const Wrapper = styled.div`
 `;
 
 const FormForList = () => {
+    const dispatch = useDispatch();
     const [isOpen, setIsOpen] = useState(false);
     const [inputedText, setInputedText] = useState('');
 
@@ -75,7 +78,7 @@ const FormForList = () => {
     };
 
     const addListHandler = () => {
-        console.log(inputedText);
+        dispatch(addList(inputedText, '0'));
         onClickHandler();
     };
 

@@ -1,3 +1,18 @@
+## V.0.0.5 April 20, 2020
+
+**Added**
+
+-   Action to adding Lists
+-   ListItem
+-   List (structure)
+
+## V.0.0.4 April 19, 2020
+
+**Added**
+
+-   Error.svg
+-   Form for adding lists
+
 ## V.0.0.3 April 13, 2020
 
 **Changes**

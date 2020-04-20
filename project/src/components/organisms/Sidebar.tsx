@@ -9,7 +9,8 @@ import MarginWrapper from '../atoms/Utilities/MarginWrapper';
 const Wrapper = styled.div`
     display: flex;
     height: 10vh;
-    min-width: 100vw;
+    min-width: 100%;
+    max-width: 999%;
     background-color: ${Colors.secodary};
     align-items: center;
     justify-content: space-between;
@@ -23,7 +24,7 @@ const Sidebar: FC<ISidebar> = (props) => {
         <Wrapper>
             <MarginWrapper left={10}>
                 <NavLink to="/" style={{ textDecoration: 'none' }}>
-                    <StyledH1>Note Up!</StyledH1>
+                    <StyledH1>Kanban</StyledH1>
                 </NavLink>
             </MarginWrapper>
             <div>
