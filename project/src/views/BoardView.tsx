@@ -29,7 +29,7 @@ const BoardView = () => {
         <MainTemplate>
             <Wrapper>
                 {lists.map((list) => {
-                    return <ListItem list={list} />;
+                    return <ListItem key={list.ID} list={list} />;
                 })}
                 <FormForList />
             </Wrapper>

@@ -25,6 +25,21 @@ const listsReducer = (state = initialState, action: any) => {
                 ],
             };
         }
+        case types.UPDATE_LIST_TITLE: {
+            return {
+                ...state,
+                lists: state.lists.map((list) => {
+                    if (list.ID === action.payload.listID) {
+                        return {
+                            ...list,
+                            listTitle: action.payload.content,
+                        };
+                    } else {
+                        return list;
+                    }
+                }),
+            };
+        }
         default:
             return state;
     }

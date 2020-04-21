@@ -9,3 +9,13 @@ export const addList = (content: string, dashboardID: string) => {
         },
     };
 };
+
+export const updateListTitle = (listID: string, content: string) => {
+    return {
+        type: types.UPDATE_LIST_TITLE,
+        payload: {
+            listID,
+            content,
+        },
+    };
+};
