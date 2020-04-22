@@ -1,8 +1,13 @@
 import React, { FC } from 'react';
-import { useDispatch } from 'react-redux';
+import {
+    useDispatch,
+    useSelector as useReduxSelector,
+    TypedUseSelectorHook,
+} from 'react-redux';
+import { RootState } from '../../store/index';
 import styled from 'styled-components';
 
-import { updateListTitle } from '../../actions/index';
+import { updateListTitle, addNote } from '../../actions/index';
 import { IList } from '../../models/List';
 
 import MainInput from '../atoms/MainInput';
@@ -28,9 +33,12 @@ const Wrapper = styled.div`
 
 const ListItem: FC<IListItem> = (props) => {
     const dispatch = useDispatch();
+    const useSelector: TypedUseSelectorHook<RootState> = useReduxSelector;
+    const allNotes = useSelector((state) => state.notes);
 
+    const myNotes = allNotes.filter((note) => note.ListID === props.list.ID);
     const addNoteHandler = (str: string) => {
-        console.log(str);
+        dispatch(addNote(props.list.ID, str));
     };
 
     const updateListTitleHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,6 +50,9 @@ const ListItem: FC<IListItem> = (props) => {
                 value={props.list.listTitle}
                 onChange={updateListTitleHandler}
             ></MainInput>
+            {myNotes.map((note) => (
+                <p>{note.content}</p>
+            ))}
             <ItemForm
                 textValue="+ Add new note"
                 secondBtnText="Add note"

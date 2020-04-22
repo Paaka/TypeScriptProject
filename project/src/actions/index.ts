@@ -19,3 +19,13 @@ export const updateListTitle = (listID: string, content: string) => {
         },
     };
 };
+
+export const addNote = (listID: string, content: string) => {
+    return {
+        type: types.ADD_NOTE,
+        payload: {
+            listID,
+            content,
+        },
+    };
+};
