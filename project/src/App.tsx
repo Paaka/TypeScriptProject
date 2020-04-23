@@ -5,17 +5,25 @@ import store from './store/index';
 
 import BoardView from './views/BoardView';
 import MainView from './views/MainView';
+import DashboardView from './views/DashboardView';
+import LoginView from './views/LoginView';
 
 function App() {
     return (
         <Provider store={store}>
             <Router>
                 <Switch>
-                    <Route exact path="/xxxx">
+                    <Route path="/xxxx">
                         <MainView></MainView>
                     </Route>
-                    <Route path="/">
+                    <Route exact path="/">
                         <BoardView></BoardView>
+                    </Route>
+                    <Route path="/Dashboards">
+                        <DashboardView></DashboardView>
+                    </Route>
+                    <Route path="/LogIn">
+                        <LoginView></LoginView>
                     </Route>
                 </Switch>
             </Router>

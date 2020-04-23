@@ -12,10 +12,8 @@ import ListItem from '../components/organisms/ListItem';
 
 const Wrapper = styled.div`
     width: 100vw;
-    max-width: 1004%;
     height: 90vh;
     background-color: ${allColors.primary};
-    float: left;
     display: grid;
     grid-template-columns: repeat(100, 25vw);
     grid-template-rows: 90vh;

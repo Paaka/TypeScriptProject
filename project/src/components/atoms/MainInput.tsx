@@ -3,11 +3,12 @@ import Sizes from '../../constants/Sizes';
 
 interface IMainInput {
     isForm?: boolean;
+    width?: number;
 }
 
 const MainInput = styled.input<IMainInput>`
     font-size: ${Sizes.L};
-    width: 90%;
+    width: ${({ width }) => (width ? width + '%' : '90%')};
     font-weight: 700;
     background-color: transparent;
     border: none;

@@ -14,7 +14,7 @@ const StyledHeading = styled.h1`
     color: ${({ color }) => (color ? color : Colors.pinkish)};
     font-size: ${Sizes.XXL};
     font-family: Arial, Helvetica, sans-serif;
-    font-weight: 400;
+    font-weight: 300;
     cursor: default;
     text-decoration: none;
 

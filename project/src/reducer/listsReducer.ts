@@ -43,6 +43,14 @@ const listsReducer = (state = initialState, action: any) => {
                 }),
             };
         }
+        case types.DELETE_LIST: {
+            return {
+                ...state,
+                lists: state.lists.filter(
+                    (list) => list.ID !== action.payload.listID
+                ),
+            };
+        }
         case types.ADD_NOTE: {
             return {
                 ...state,

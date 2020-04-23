@@ -29,3 +29,12 @@ export const addNote = (listID: string, content: string) => {
         },
     };
 };
+
+export const deleteList = (listID: string) => {
+    return {
+        type: types.DELETE_LIST,
+        payload: {
+            listID,
+        },
+    };
+};
