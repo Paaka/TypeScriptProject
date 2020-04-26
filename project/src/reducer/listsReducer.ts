@@ -60,6 +60,23 @@ const listsReducer = (state = initialState, action: any) => {
                 ],
             };
         }
+        case types.DRAG_NOTE: {
+            console.log(action.payload);
+            return {
+                ...state,
+                notes: state.notes.map((note) => {
+                    if (note.ID === action.payload.noteID) {
+                        console.log('work');
+                        return {
+                            ...note,
+                            ListID: action.payload.listID,
+                        };
+                    } else {
+                        return note;
+                    }
+                }),
+            };
+        }
         default:
             return state;
     }

@@ -1,5 +1,9 @@
 ## V.0.0.6 April 26, 2020
 
+**Added**
+
+-   Drag and Drop system;
+
 **Fixed**
 
 -   List Height bug

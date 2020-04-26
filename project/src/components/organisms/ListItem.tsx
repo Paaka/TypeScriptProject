@@ -7,7 +7,12 @@ import {
 import { RootState } from '../../store/index';
 import styled from 'styled-components';
 
-import { updateListTitle, addNote, deleteList } from '../../actions/index';
+import {
+    updateListTitle,
+    addNote,
+    deleteList,
+    dragNote,
+} from '../../actions/index';
 import { IList } from '../../models/List';
 
 import MainInput from '../atoms/MainInput';
@@ -81,8 +86,21 @@ const ListItem: FC<IListItem> = (props) => {
         return 28 + numOfItems;
     };
 
+    const dropHandler = (e: React.DragEvent<HTMLDivElement>) => {
+        e.preventDefault();
+        const card_id = e.dataTransfer.getData('card_id');
+        dispatch(dragNote(card_id, props.list.ID));
+    };
+    const dragOverHandler = (e: React.DragEvent<HTMLDivElement>) => {
+        e.preventDefault();
+    };
+
     return (
-        <Wrapper height={calculateHeight()}>
+        <Wrapper
+            onDrop={dropHandler}
+            onDragOver={dragOverHandler}
+            height={calculateHeight()}
+        >
             <InputWrapper>
                 <MainInput
                     width={70}
@@ -96,7 +114,7 @@ const ListItem: FC<IListItem> = (props) => {
                     iconPath={require('../../assets/SVGs/cancel.svg')}
                 ></ButtonIcon>
             </InputWrapper>
-            <SecondWrapper numberOfItems={myNotes.length}>
+            <SecondWrapper onDrop={dropHandler} numberOfItems={myNotes.length}>
                 {myNotes.map((note) => (
                     <SingleNote note={note} />
                 ))}

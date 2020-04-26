@@ -38,3 +38,13 @@ export const deleteList = (listID: string) => {
         },
     };
 };
+
+export const dragNote = (noteID: string, listID: string) => {
+    return {
+        type: types.DRAG_NOTE,
+        payload: {
+            noteID,
+            listID,
+        },
+    };
+};

@@ -16,9 +16,29 @@ interface ISingleNote {
     note: INote;
 }
 
+interface selectProtected {
+    card: HTMLDivElement;
+}
+
 const SingleNote: FC<ISingleNote> = (props) => {
+    const dragOverHandler = (e: React.DragEvent<HTMLDivElement>) => {
+        e.stopPropagation();
+    };
+
+    const dragHandler = (e: React.DragEvent<HTMLDivElement>) => {
+        const evTarget = e.target as HTMLDivElement;
+        e.dataTransfer.setData('card_id', evTarget.id);
+        setTimeout(() => {
+            evTarget.style.display = 'none';
+        }, 0);
+    };
     return (
-        <Wrapper>
+        <Wrapper
+            draggable="true"
+            id={props.note.ID}
+            onDragStart={dragHandler}
+            onDragOver={dragOverHandler}
+        >
             <StyledParagraph>{props.note.content}</StyledParagraph>
         </Wrapper>
     );
