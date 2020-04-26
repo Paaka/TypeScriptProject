@@ -8,6 +8,8 @@ interface IMainTemplate {
 }
 
 const Wrapper = styled.div`
+    position: relative;
+    overflow: none;
     width: 100%;
 `;
 

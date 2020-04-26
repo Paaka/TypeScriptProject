@@ -7,6 +7,7 @@ import styled from 'styled-components';
 interface IDashboardView {}
 
 const Wrapper = styled.div`
+    margin-top: 10vh;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
 `;

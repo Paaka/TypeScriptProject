@@ -1,3 +1,11 @@
+## V.0.0.6 April 26, 2020
+
+**Fixed**
+
+-   List Height bug
+-   Sidebar bug
+-   Board width Bug
+
 ## V.0.0.5 April 20, 2020
 
 **Added**

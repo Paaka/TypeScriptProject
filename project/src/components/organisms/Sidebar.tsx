@@ -15,6 +15,8 @@ const Wrapper = styled.div`
     align-items: center;
     justify-content: space-between;
     border-bottom: 2px solid ${Colors.dark};
+    position: fixed;
+    top: 0;
 `;
 
 interface ISidebar {}

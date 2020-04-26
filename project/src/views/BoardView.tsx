@@ -10,9 +10,14 @@ import FormForList from '../components/molecules/FormForLists';
 import allColors from '../constants/allColors';
 import ListItem from '../components/organisms/ListItem';
 
-const Wrapper = styled.div`
-    width: 100vw;
+interface IWrapper {
+    width: number;
+}
+
+const Wrapper = styled.div<IWrapper>`
+    width: ${(props) => props.width + 'vw'};
     height: 90vh;
+    margin-top: 10vh;
     background-color: ${allColors.primary};
     display: grid;
     grid-template-columns: repeat(100, 25vw);
@@ -23,9 +28,18 @@ const BoardView = () => {
     const useSelector: TypedUseSelectorHook<RootState> = useReduxSelector;
     const lists = useSelector((state) => state.lists);
 
+    const calculateWidth = () => {
+        const numOfItems = lists.length;
+        if (numOfItems < 3) {
+            return 100;
+        } else {
+            return numOfItems * 25 + 25;
+        }
+    };
+
     return (
         <MainTemplate>
-            <Wrapper>
+            <Wrapper width={calculateWidth()}>
                 {lists.map((list) => {
                     return <ListItem key={list.ID} list={list} />;
                 })}
