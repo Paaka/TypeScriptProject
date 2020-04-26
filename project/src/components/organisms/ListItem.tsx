@@ -20,6 +20,7 @@ import allColors from '../../constants/allColors';
 import ItemForm from '../molecules/ItemForm';
 import SingleNote from '../molecules/SingleNote';
 import ButtonIcon from '../atoms/Buttons/ButtonIcon';
+import { isNull } from 'util';
 
 interface IListItem {
     list: IList;
@@ -90,6 +91,10 @@ const ListItem: FC<IListItem> = (props) => {
         e.preventDefault();
         const card_id = e.dataTransfer.getData('card_id');
         dispatch(dragNote(card_id, props.list.ID));
+        const el = document.getElementById(card_id);
+        if (el !== null) {
+            el.style.display = 'block';
+        }
     };
     const dragOverHandler = (e: React.DragEvent<HTMLDivElement>) => {
         e.preventDefault();

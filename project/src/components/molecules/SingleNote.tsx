@@ -23,6 +23,7 @@ interface selectProtected {
 const SingleNote: FC<ISingleNote> = (props) => {
     const dragOverHandler = (e: React.DragEvent<HTMLDivElement>) => {
         e.stopPropagation();
+        console.log(e);
     };
 
     const dragHandler = (e: React.DragEvent<HTMLDivElement>) => {
@@ -32,12 +33,23 @@ const SingleNote: FC<ISingleNote> = (props) => {
             evTarget.style.display = 'none';
         }, 0);
     };
+
+    const dropHandler = (e: React.DragEvent<HTMLDivElement>) => {
+        e.preventDefault();
+
+        const el = document.getElementById(props.note.ID);
+        if (el !== null) {
+            el.style.display = 'block';
+        }
+    };
+
     return (
         <Wrapper
             draggable="true"
             id={props.note.ID}
             onDragStart={dragHandler}
             onDragOver={dragOverHandler}
+            onDragEnd={dropHandler}
         >
             <StyledParagraph>{props.note.content}</StyledParagraph>
         </Wrapper>
