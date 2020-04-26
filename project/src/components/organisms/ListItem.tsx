@@ -19,18 +19,25 @@ import ButtonIcon from '../atoms/Buttons/ButtonIcon';
 interface IListItem {
     list: IList;
 }
+interface IHeightWrapper {
+    height: number;
+}
 
 interface IWrapper {
     numberOfItems: number;
 }
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<IHeightWrapper>`
     display: flex;
     flex-direction: column;
     background-color: ${allColors.light};
     padding: 10px;
     margin: 10px;
     border-radius: 5px;
+    height: ${(props) => props.height + 'vh'};
+    max-height: 85vh;
+    transition: height 0.2s;
+    overflow: none;
 `;
 
 const SecondWrapper = styled.div<IWrapper>`
@@ -69,8 +76,13 @@ const ListItem: FC<IListItem> = (props) => {
         dispatch(deleteList(props.list.ID));
     };
 
+    const calculateHeight = () => {
+        const numOfItems = myNotes.length * 7;
+        return 28 + numOfItems;
+    };
+
     return (
-        <Wrapper>
+        <Wrapper height={calculateHeight()}>
             <InputWrapper>
                 <MainInput
                     width={70}
