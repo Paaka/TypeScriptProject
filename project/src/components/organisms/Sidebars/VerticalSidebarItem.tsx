@@ -20,17 +20,17 @@ interface IPath {
     iconPath: string;
 }
 const HighlightWrapper = styled.div<IColor>`
-    width: 3px;
+    width: 4px;
     height: 100%;
     transform: translateX(${({ isActive }) => (isActive ? '0%' : '-100%')});
     background-color: ${({ color }) => color};
     transition: all 0.2s;
 `;
 
-const StlyedText = styled.p`
+const StlyedText = styled.p<IColor>`
     font-family: arial;
     font-size: 14px;
-    color: ${allColors.secodary};
+    color: ${(props) => (props.isActive ? props.color : allColors.secodary)};
     margin: 0;
     transition: color 0.2s;
     cursor: pointer;
@@ -94,7 +94,9 @@ const VerticalSidebarItem: FC<IVerticalSidebarItem> = ({
                     <IconDiv
                         iconPath={isActive ? iconPathActive : iconPath}
                     ></IconDiv>
-                    <StlyedText>{children}</StlyedText>
+                    <StlyedText isActive={isActive} color={color}>
+                        {children}
+                    </StlyedText>
                 </IconAndTextWrapper>
             </Wrapper>
         </NavLink>

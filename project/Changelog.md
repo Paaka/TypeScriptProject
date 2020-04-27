@@ -4,9 +4,15 @@
 
 -   Redesign whole vertical navbar;
 
-**Addedd**
+**Added**
 
+-   Icons: Settings.svg, statistic.svg, calendar.svg, dashboard.svg,
+-   Vertical Sidebar
 -   Couple of icons(all svg): notification, search (white/blue), target, user.
+
+**Deleted**
+
+-   MainView, LoginView
 
 ## V.0.0.6 April 26, 2020
 

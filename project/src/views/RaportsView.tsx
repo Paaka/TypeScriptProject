@@ -1,12 +1,12 @@
 import React from 'react';
 import MainTemplate from '../templates/MainTemplate';
 
-const MainView = () => {
+const RaportsView = () => {
     return (
         <MainTemplate>
-            <p>Hi this is main View</p>
+            <p>Hi this is raports view</p>
         </MainTemplate>
     );
 };
 
-export default MainView;
+export default RaportsView;

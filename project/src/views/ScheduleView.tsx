@@ -1,14 +1,14 @@
 import React, { FC } from 'react';
 import MainTemplate from '../templates/MainTemplate';
 
-interface ILoginView {}
+interface IScheduleView {}
 
-const LoginView: FC<ILoginView> = () => {
+const ScheduleView: FC<IScheduleView> = () => {
     return (
         <MainTemplate>
-            <h1>LoginView</h1>
+            <h1>ScheduleView</h1>
         </MainTemplate>
     );
 };
 
-export default LoginView;
+export default ScheduleView;
