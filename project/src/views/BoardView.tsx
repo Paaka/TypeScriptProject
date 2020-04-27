@@ -17,7 +17,6 @@ interface IWrapper {
 const Wrapper = styled.div<IWrapper>`
     width: ${(props) => props.width + 'vw'};
     height: 90vh;
-    margin-top: 10vh;
     background-color: ${allColors.primary};
     display: grid;
     grid-template-columns: repeat(100, 25vw);
@@ -31,7 +30,7 @@ const BoardView = () => {
     const calculateWidth = () => {
         const numOfItems = lists.length;
         if (numOfItems < 3) {
-            return 100;
+            return 90;
         } else {
             return numOfItems * 25 + 25;
         }

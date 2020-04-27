@@ -12,20 +12,26 @@ interface IButtonIcon extends IStyledBtnIcon {
 }
 
 const BtnIcon = styled.div<IStyledBtnIcon>`
+    box-sizing: content-box;
     width: ${({ width }) => width + 'px'};
     height: ${({ height }) => height + 'px'};
+    padding: 2px;
     background-image: url(${(props) => props.iconPath});
     background-position-x: center;
     background-position-y: center;
     background-color: transparent;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: ${({ width }) => width + 'px'};
     transition: all 0.2s;
 
     &:hover {
         background-color: rgba(0, 0, 0, 0.15);
         border-radius: 50%;
         cursor: pointer;
+    }
+
+    &:active {
+        background-color: rgba(0, 0, 0, 0.25);
     }
 `;
 

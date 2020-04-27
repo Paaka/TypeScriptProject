@@ -9,4 +9,5 @@ export default {
     borderLightBlue: 'rgb(153,197,251)',
     lightBlue: 'rgb(146,170,251)',
     mediumBlue: 'rgb(132,144,219)',
+    green: 'rgb(127,212,186)',
 };
