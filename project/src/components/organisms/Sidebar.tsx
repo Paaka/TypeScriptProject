@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import Colors from '../../constants/allColors';
 import StyledParagraph from '../atoms/Typography/StyledParagraph';
@@ -12,7 +12,7 @@ const Wrapper = styled.div`
     display: flex;
     height: 10vh;
     width: 100%;
-    background-color: ${Colors.lightBlue};
+    background-color: ${(props) => props.color};
     align-items: center;
     position: fixed;
     top: 0;
@@ -27,7 +27,7 @@ const DarkerWrapper = styled.div`
     width: 10vw;
     justify-content: center;
     align-items: center;
-    background-color: ${Colors.mediumBlue};
+    background-color: ${(props) => props.color};
 `;
 
 const RightWrapper = styled.div`
@@ -50,7 +50,7 @@ const UserWrapper = styled.div`
     width: min-content;
     align-items: center;
     justify-content: center;
-    border-left: 2px solid ${allColors.borderLightBlue};
+    border-left: 2px solid ${(props) => props.color};
 `;
 
 const TextWrapper = styled.div`
@@ -64,14 +64,56 @@ const ItemWrapper = styled.div`
     align-items: center;
     width: 4rem;
     height: 100%;
-    border-left: 2px solid ${allColors.borderLightBlue};
+    border-left: 2px solid ${(props) => props.color};
 `;
 
+const CalculateColors = () => {
+    const location = useLocation();
+    switch (location.pathname) {
+        case '/': {
+            return {
+                primary: allColors.lightBlue,
+                secondary: allColors.mediumBlue,
+                border: allColors.borderLightBlue,
+            };
+        }
+        case '/Schedule': {
+            return {
+                primary: allColors.green,
+                secondary: allColors.greenBlue,
+                border: allColors.borderGreen,
+            };
+        }
+        case '/Raports': {
+            return {
+                primary: allColors.pink,
+                secondary: allColors.pinkDark,
+                border: allColors.pinkBorder,
+            };
+        }
+        case '/Settings': {
+            return {
+                primary: allColors.orange,
+                secondary: allColors.orangeDark,
+                border: '#ffd79e',
+            };
+        }
+        default: {
+            return {
+                primary: allColors.lightBlue,
+                secondary: allColors.mediumBlue,
+                border: allColors.borderLightBlue,
+            };
+        }
+    }
+};
+
 const Sidebar: FC<ISidebar> = (props) => {
+    const colors = CalculateColors();
     return (
-        <Wrapper>
+        <Wrapper color={colors.primary}>
             <LeftWrapper>
-                <DarkerWrapper>
+                <DarkerWrapper color={colors.secondary}>
                     <NavLink to="/" style={{ textDecoration: 'none' }}>
                         <StyledParagraph fontSize={18} color="white">
                             kanban
@@ -81,7 +123,7 @@ const Sidebar: FC<ISidebar> = (props) => {
                 <SearchInput />
             </LeftWrapper>
             <RightWrapper>
-                <ItemWrapper>
+                <ItemWrapper color={colors.border}>
                     <ButtonIcon
                         width={25}
                         height={25}
@@ -91,7 +133,7 @@ const Sidebar: FC<ISidebar> = (props) => {
                         }}
                     />
                 </ItemWrapper>
-                <UserWrapper>
+                <UserWrapper color={colors.border}>
                     <TextWrapper>
                         <StyledParagraph color="white">
                             M. Hartabus

@@ -10,6 +10,12 @@ export default {
     lightBlue: 'rgb(146,170,251)',
     mediumBlue: 'rgb(132,144,219)',
     green: 'rgb(127,212,186)',
+    greenBlue: '#3db490',
+    borderGreen: '#c8ede1',
     pink: 'rgb(224,118,142)',
+    pinkDark: '#c72d50',
+    pinkBorder: '#f2c6d0',
+    purpule: 'rgb(203,127,235)',
     orange: 'rgb(255,182,79)',
+    orangeDark: '#ec8a00',
 };
