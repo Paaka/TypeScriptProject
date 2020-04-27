@@ -5,4 +5,8 @@ export default {
     light: '#DAECF7',
     dark: '#2D2A32',
     pinkish: '#F7567C',
+    grey: 'rgb(216,216,228)',
+    borderLightBlue: 'rgb(153,197,251)',
+    lightBlue: 'rgb(146,170,251)',
+    mediumBlue: 'rgb(132,144,219)',
 };

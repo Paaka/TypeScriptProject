@@ -1,42 +1,107 @@
 import React, { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
-import UnderlineBtn from '../atoms/Buttons/UnderlineBtn';
 import Colors from '../../constants/allColors';
-import StyledH1 from '../atoms/Typography/StyledH1';
-import MarginWrapper from '../atoms/Utilities/MarginWrapper';
+import StyledParagraph from '../atoms/Typography/StyledParagraph';
+import SearchInput from '../molecules/SearchInput';
+import UserPicture from '../atoms/UserPicture';
+import allColors from '../../constants/allColors';
+import ButtonIcon from '../atoms/Buttons/ButtonIcon';
 
 const Wrapper = styled.div`
     display: flex;
     height: 10vh;
-    min-width: 100%;
-    max-width: 999%;
-    background-color: ${Colors.secodary};
+    width: 100%;
+    background-color: ${Colors.lightBlue};
     align-items: center;
-    justify-content: space-between;
-    border-bottom: 2px solid ${Colors.dark};
     position: fixed;
     top: 0;
+    justify-content: space-between;
 `;
 
 interface ISidebar {}
 
+const DarkerWrapper = styled.div`
+    display: flex;
+    height: 10vh;
+    width: 10vw;
+    justify-content: center;
+    align-items: center;
+    background-color: ${Colors.mediumBlue};
+`;
+
+const RightWrapper = styled.div`
+    display: flex;
+    height: 100%;
+    width: 20vw;
+    justify-content: flex-end;
+    margin-right: 20px;
+    white-space: nowrap;
+`;
+
+const LeftWrapper = styled.div`
+    display: flex;
+    height: 100%;
+`;
+
+const UserWrapper = styled.div`
+    display: flex;
+    height: 100%;
+    width: min-content;
+    align-items: center;
+    justify-content: center;
+    border-left: 2px solid ${allColors.borderLightBlue};
+`;
+
+const TextWrapper = styled.div`
+    padding-left: 10px;
+    padding-right: 10px;
+`;
+
+const ItemWrapper = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 4rem;
+    height: 100%;
+    border-left: 2px solid ${allColors.borderLightBlue};
+`;
+
 const Sidebar: FC<ISidebar> = (props) => {
     return (
         <Wrapper>
-            <MarginWrapper left={10}>
-                <NavLink to="/" style={{ textDecoration: 'none' }}>
-                    <StyledH1>Kanban</StyledH1>
-                </NavLink>
-            </MarginWrapper>
-            <div>
-                <NavLink to="/Dashboards">
-                    <UnderlineBtn onClickFn={() => {}}>Dashboards</UnderlineBtn>
-                </NavLink>
-                <NavLink to="/LogIn">
-                    <UnderlineBtn onClickFn={() => {}}>Log In</UnderlineBtn>
-                </NavLink>
-            </div>
+            <LeftWrapper>
+                <DarkerWrapper>
+                    <NavLink to="/" style={{ textDecoration: 'none' }}>
+                        <StyledParagraph fontSize={18} color="white">
+                            kanban
+                        </StyledParagraph>
+                    </NavLink>
+                </DarkerWrapper>
+                <SearchInput />
+            </LeftWrapper>
+            <RightWrapper>
+                <ItemWrapper>
+                    <ButtonIcon
+                        width={25}
+                        height={25}
+                        iconPath={require('../../assets/SVGs/notification.svg')}
+                        onClickFn={() => {
+                            console.log('notification');
+                        }}
+                    />
+                </ItemWrapper>
+                <UserWrapper>
+                    <TextWrapper>
+                        <StyledParagraph color="white">
+                            M. Hartabus
+                        </StyledParagraph>
+                    </TextWrapper>
+                    <UserPicture
+                        logoPath={require('../../assets/SVGs/user.svg')}
+                    />
+                </UserWrapper>
+            </RightWrapper>
         </Wrapper>
     );
 };

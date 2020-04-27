@@ -1,4 +1,18 @@
+## V.0.0.7 April 27,2020
+
+**Changes**
+
+-   Redesign whole vertical navbar;
+
+**Addedd**
+
+-   Couple of icons(all svg): notification, search (white/blue), target, user.
+
 ## V.0.0.6 April 26, 2020
+
+**Changes**
+
+-   Started to change style of sidebar
 
 **Added**
 

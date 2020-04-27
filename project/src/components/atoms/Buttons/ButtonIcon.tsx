@@ -19,6 +19,14 @@ const BtnIcon = styled.div<IStyledBtnIcon>`
     background-position-y: center;
     background-color: transparent;
     background-repeat: no-repeat;
+    background-size: cover;
+    transition: all 0.2s;
+
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.15);
+        border-radius: 50%;
+        cursor: pointer;
+    }
 `;
 
 const ButtonIcon: FC<IButtonIcon> = ({
