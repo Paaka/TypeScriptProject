@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-interface IDivImage {
+export interface IDivImage {
     imagePath: string;
     width?: number;
     height?: number;

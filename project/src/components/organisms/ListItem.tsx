@@ -41,9 +41,10 @@ const Wrapper = styled.div<IHeightWrapper>`
     margin: 10px;
     border-radius: 5px;
     height: ${(props) => props.height + 'vh'};
-    max-height: 85vh;
+    max-height: 80vh;
     transition: height 0.2s;
     overflow: none;
+    margin-top: 7vh;
 `;
 
 const SecondWrapper = styled.div<IWrapper>`

@@ -9,6 +9,7 @@ import MainTemplate from '../templates/MainTemplate';
 import FormForList from '../components/molecules/FormForLists';
 import allColors from '../constants/allColors';
 import ListItem from '../components/organisms/ListItem';
+import BoardsList from '../components/molecules/BoardsList';
 
 interface IWrapper {
     width: number;
@@ -21,11 +22,6 @@ const ColumnWrapper = styled.div<IWrapper>`
     display: grid;
     grid-template-columns: repeat(100, 25vw);
     grid-template-rows: 90vh;
-`;
-
-const Wrapper = styled.div`
-    width: 100%;
-    height: 100%;
 `;
 
 const BoardView = () => {
@@ -43,14 +39,13 @@ const BoardView = () => {
 
     return (
         <MainTemplate>
-            <Wrapper>
-                <ColumnWrapper width={calculateWidth()}>
-                    {lists.map((list) => {
-                        return <ListItem key={list.ID} list={list} />;
-                    })}
-                    <FormForList />
-                </ColumnWrapper>
-            </Wrapper>
+            <ColumnWrapper width={calculateWidth()}>
+                <BoardsList>Board1</BoardsList>
+                {lists.map((list) => {
+                    return <ListItem key={list.ID} list={list} />;
+                })}
+                <FormForList />
+            </ColumnWrapper>
         </MainTemplate>
     );
 };

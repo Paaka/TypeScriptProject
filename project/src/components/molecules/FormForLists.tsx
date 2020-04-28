@@ -17,6 +17,10 @@ const Column = styled.div`
 
 interface IStyledButton {
     isFormOpen: boolean;
+    width?: number;
+    height?: number;
+    bgSize?: number;
+    mLeft?: number;
 }
 
 const StyledButton = styled.div<IStyledButton>`
@@ -28,7 +32,7 @@ const StyledButton = styled.div<IStyledButton>`
     align-items: center;
     background-color: ${(props) =>
         props.isFormOpen ? allColors.listColor : allColors.listColor};
-    margin: 10px auto 0;
+    margin: 7vh auto 0;
     padding: 10px 0px;
     border-radius: 5px;
     z-index: 0;

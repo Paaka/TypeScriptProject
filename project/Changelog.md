@@ -1,3 +1,13 @@
+## V.0.0.8 April 28,2020
+
+**Added**
+
+-   BoardsList
+
+**Changes**
+
+-   Redesign form to add list / item.
+
 ## V.0.0.7 April 27,2020
 
 **Changes**

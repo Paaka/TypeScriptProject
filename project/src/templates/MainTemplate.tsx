@@ -11,6 +11,7 @@ interface IMainTemplate {
 const Wrapper = styled.div`
     position: relative;
     overflow: none;
+    overflow-y: none;
     width: 100%;
 `;
 
