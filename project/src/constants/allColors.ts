@@ -5,6 +5,7 @@ export default {
     light: '#DAECF7',
     dark: '#2D2A32',
     pinkish: '#F7567C',
+    darkGrey: 'rgb(143,145,168)',
     grey: 'rgb(201,206,213)',
     borderLightBlue: 'rgb(153,197,251)',
     lightBlue: 'rgb(146,170,251)',
@@ -18,4 +19,6 @@ export default {
     purpule: 'rgb(203,127,235)',
     orange: 'rgb(255,182,79)',
     orangeDark: '#ec8a00',
+    lightGray: 'rgb(230,233,240)',
+    listColor: 'rgb(239,242,245)',
 };

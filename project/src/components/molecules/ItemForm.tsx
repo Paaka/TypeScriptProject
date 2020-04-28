@@ -1,13 +1,13 @@
 import React, { FC, useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
-import { addList } from '../../actions/index';
 
 import Button from '../atoms/Buttons/Button';
 import allColors from '../../constants/allColors';
 import Sizes from '../../constants/Sizes';
 import MainInput from '../atoms/MainInput';
 import ButtonIcon from '../atoms/Buttons/ButtonIcon';
+import DivImage from '../atoms/DivImage';
 
 const Column = styled.div`
     height: 90vh;
@@ -31,8 +31,7 @@ const StyledButton = styled.div<IStyledButton>`
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: ${(props) =>
-        props.isFormOpen ? allColors.light : 'rgba(0, 0, 0, 0.3)'};
+    background-color: ${allColors.listColor};
     margin: 10px auto 0;
     padding: 10px 0px;
     border-radius: 5px;
@@ -40,19 +39,19 @@ const StyledButton = styled.div<IStyledButton>`
     transition: all 0.2s;
     &:hover {
         background-color: ${(props) =>
-            props.isFormOpen ? allColors.light : 'rgba(0, 0, 0, 0.2)'};
+            props.isFormOpen ? allColors.listColor : 'rgba(0, 0, 0, 0.02)'};
     }
 
     &:active {
         background-color: ${(props) =>
-            props.isFormOpen ? allColors.light : 'rgba(0, 0, 0, 0.1)'};
+            props.isFormOpen ? allColors.listColor : 'rgba(0, 0, 0, 0.01)'};
     }
 `;
 
 const StyledText = styled.p`
-    color: ${allColors.light};
+    color: ${allColors.darkGrey};
     font-family: Arial, Helvetica, sans-serif;
-    font-size: ${Sizes.L};
+    font-size: ${Sizes.M};
 `;
 
 const RowWrapper = styled.div`
@@ -66,6 +65,13 @@ const RowWrapper = styled.div`
 const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
+    align-items: center;
+`;
+
+const InputWrapper = styled.div`
+    display: flex;
+    width: 100%;
+    justify-content: center;
     align-items: center;
 `;
 
@@ -104,15 +110,21 @@ const ItemForm: FC<IItemForm> = (props) => {
                                 {props.secondBtnText}
                             </Button>
                             <ButtonIcon
-                                iconPath={require('../../assets/SVGs/error.svg')}
+                                iconPath={require('../../assets/SVGs/close.svg')}
                                 onClickFn={toggleModalHandler}
                             />
                         </RowWrapper>
                     </Wrapper>
                 ) : (
-                    <div onClick={toggleModalHandler}>
+                    <InputWrapper onClick={toggleModalHandler}>
                         <StyledText>{props.textValue}</StyledText>
-                    </div>
+                        <DivImage
+                            height={15}
+                            width={15}
+                            mLeft={5}
+                            imagePath={require('../../assets/SVGs/add.svg')}
+                        />
+                    </InputWrapper>
                 )}
             </StyledButton>
         </Column>

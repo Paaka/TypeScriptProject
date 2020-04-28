@@ -14,13 +14,18 @@ interface IWrapper {
     width: number;
 }
 
-const Wrapper = styled.div<IWrapper>`
+const ColumnWrapper = styled.div<IWrapper>`
     width: ${(props) => props.width + 'vw'};
     height: 90vh;
-    background-color: ${allColors.primary};
+    background-color: ${allColors.lightGray};
     display: grid;
     grid-template-columns: repeat(100, 25vw);
     grid-template-rows: 90vh;
+`;
+
+const Wrapper = styled.div`
+    width: 100%;
+    height: 100%;
 `;
 
 const BoardView = () => {
@@ -38,11 +43,13 @@ const BoardView = () => {
 
     return (
         <MainTemplate>
-            <Wrapper width={calculateWidth()}>
-                {lists.map((list) => {
-                    return <ListItem key={list.ID} list={list} />;
-                })}
-                <FormForList />
+            <Wrapper>
+                <ColumnWrapper width={calculateWidth()}>
+                    {lists.map((list) => {
+                        return <ListItem key={list.ID} list={list} />;
+                    })}
+                    <FormForList />
+                </ColumnWrapper>
             </Wrapper>
         </MainTemplate>
     );

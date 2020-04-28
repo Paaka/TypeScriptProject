@@ -36,7 +36,7 @@ interface IWrapper {
 const Wrapper = styled.div<IHeightWrapper>`
     display: flex;
     flex-direction: column;
-    background-color: ${allColors.light};
+    background-color: ${allColors.listColor};
     padding: 10px;
     margin: 10px;
     border-radius: 5px;
@@ -124,7 +124,7 @@ const ListItem: FC<IListItem> = (props) => {
                     <SingleNote note={note} />
                 ))}
                 <ItemForm
-                    textValue="+ Add new note"
+                    textValue="Add note"
                     secondBtnText="Add note"
                     onClickFn={addNoteHandler}
                 ></ItemForm>

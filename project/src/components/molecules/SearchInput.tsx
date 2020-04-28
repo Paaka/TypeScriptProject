@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import allColors from '../../constants/allColors';
 const Wrapper = styled.div`
@@ -11,7 +11,7 @@ const Wrapper = styled.div`
 const StyledInput = styled.input`
     width: 50%;
     background-color: white;
-    color: ${allColors.lightBlue};
+    color: ${(props) => props.color};
     outline: none;
     border: none;
     height: 20px;
@@ -21,7 +21,7 @@ const StyledInput = styled.input`
     transition: width 0.4s;
 
     &::placeholder {
-        color: ${allColors.mediumBlue};
+        color: ${(props) => props.color};
     }
     &:focus {
         background-color: white;
@@ -43,11 +43,18 @@ const MagnifierIcon = styled.div`
     background-image: url(${require('../../assets/SVGs/searchBlue.svg')});
 `;
 
-const SearchInput = () => {
+interface ISearchInput {
+    color: string;
+}
+
+const SearchInput: FC<ISearchInput> = (props) => {
     return (
         <Wrapper>
             <MagnifierIcon></MagnifierIcon>
-            <StyledInput placeholder="Search for tasks..." />
+            <StyledInput
+                color={props.color}
+                placeholder="Search for tasks..."
+            />
         </Wrapper>
     );
 };

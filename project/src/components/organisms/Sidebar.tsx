@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-import Colors from '../../constants/allColors';
 import StyledParagraph from '../atoms/Typography/StyledParagraph';
 import SearchInput from '../molecules/SearchInput';
 import UserPicture from '../atoms/UserPicture';
@@ -120,7 +119,7 @@ const Sidebar: FC<ISidebar> = (props) => {
                         </StyledParagraph>
                     </NavLink>
                 </DarkerWrapper>
-                <SearchInput />
+                <SearchInput color={colors.primary} />
             </LeftWrapper>
             <RightWrapper>
                 <ItemWrapper color={colors.border}>

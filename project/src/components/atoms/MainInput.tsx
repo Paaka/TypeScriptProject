@@ -25,9 +25,15 @@ const MainInput = styled.input<IMainInput>`
     ${({ isForm }) =>
         isForm &&
         css`
-            background-color: white;
-            border: 2px solid royalblue;
-            border-radius: 10px;
+            border-bottom: 2px solid royalblue;
+            border-radius: 0px;
+
+            &:focus {
+                background-color: transparent;
+                border: none;
+                border-bottom: 2px solid royalblue;
+                border-radius: 2px;
+            }
         `}
 `;
 
