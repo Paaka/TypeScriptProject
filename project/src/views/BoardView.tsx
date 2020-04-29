@@ -10,6 +10,7 @@ import FormForList from '../components/molecules/FormForLists';
 import allColors from '../constants/allColors';
 import ListItem from '../components/organisms/ListItem';
 import BoardsList from '../components/molecules/BoardsList';
+import BoardFormModal from '../components/organisms/BoardFormModal';
 
 interface IWrapper {
     width: number;
@@ -45,6 +46,7 @@ const BoardView = () => {
                     return <ListItem key={list.ID} list={list} />;
                 })}
                 <FormForList />
+                <BoardFormModal />
             </ColumnWrapper>
         </MainTemplate>
     );

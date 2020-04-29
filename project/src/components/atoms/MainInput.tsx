@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import Sizes from '../../constants/Sizes';
+import allColors from '../../constants/allColors';
 
 interface IMainInput {
     isForm?: boolean;
@@ -25,7 +26,7 @@ const MainInput = styled.input<IMainInput>`
     ${({ isForm }) =>
         isForm &&
         css`
-            border-bottom: 2px solid royalblue;
+            border-bottom: 2px solid ${allColors.darkGrey};
             border-radius: 0px;
 
             &:focus {
