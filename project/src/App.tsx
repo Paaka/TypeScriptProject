@@ -10,6 +10,7 @@ import DashboardView from './views/DashboardView';
 import SettingsView from './views/SettingsView';
 import RaportsView from './views/RaportsView';
 import ScheduleView from './views/ScheduleView';
+import LoginView from './views/LoginView';
 
 function App() {
     return (
@@ -30,6 +31,9 @@ function App() {
                     </Route>
                     <Route path="/Schedule">
                         <ScheduleView></ScheduleView>
+                    </Route>
+                    <Route path="/Login">
+                        <LoginView></LoginView>
                     </Route>
                 </Switch>
             </Router>

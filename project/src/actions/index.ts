@@ -48,3 +48,12 @@ export const dragNote = (noteID: string, listID: string) => {
         },
     };
 };
+
+export const addBoard = (title: string) => {
+    return {
+        type: types.ADD_BOARD,
+        payload: {
+            boardTitle: title,
+        },
+    };
+};
