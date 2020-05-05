@@ -1,3 +1,11 @@
+## V.0.1.1 May 05,2020
+
+**Added**
+
+-   Font: Montserrat,
+-   Icons: Email.svg,
+-   Components: LoginForm, LoginInput.
+
 ## V.0.1.0 May 04,2020
 
 **Added**

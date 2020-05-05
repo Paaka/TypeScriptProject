@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import allColors from '../constants/allColors';
+import LoginForm from '../components/organisms/LoginForm/LoginForm';
 
 const Wrapper = styled.div`
     width: 100vw;
@@ -8,25 +9,17 @@ const Wrapper = styled.div`
     background-image: linear-gradient(
         to right bottom,
         ${allColors.mediumBlue},
-        ${allColors.lightBlue}
+        ${allColors.borderLightBlue}
     );
     display: flex;
     justify-content: center;
     align-items: center;
 `;
 
-const LoginWrapper = styled.div`
-    height: 66vh;
-    width: 25vw;
-    background-color: white;
-    border-radius: 2px;
-    box-shadow: 5px 5px 20px -8px rgba(0, 0, 0, 1);
-`;
-
 const LoginView = () => {
     return (
         <Wrapper>
-            <LoginWrapper>Welcome</LoginWrapper>
+            <LoginForm></LoginForm>
         </Wrapper>
     );
 };
