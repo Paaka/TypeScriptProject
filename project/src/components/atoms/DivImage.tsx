@@ -6,6 +6,7 @@ export interface IDivImage {
     height?: number;
     bgSize?: number;
     mLeft?: number;
+    pHorizontal?: number;
 }
 
 const DivImage = styled.div<IDivImage>`
@@ -19,6 +20,10 @@ const DivImage = styled.div<IDivImage>`
     width: ${(props) => (props.width ? props.width + 'px' : '20px')};
     height: ${(props) => (props.height ? props.height + 'px' : '20px')};
     margin-left: ${(props) => (props.mLeft ? props.mLeft + 'px' : '0px')};
+    padding-left: ${({ pHorizontal }) =>
+        pHorizontal ? pHorizontal + 'px' : '0px'};
+    padding-right: ${({ pHorizontal }) =>
+        pHorizontal ? pHorizontal + 'px' : '0px'};
 `;
 
 export default DivImage;

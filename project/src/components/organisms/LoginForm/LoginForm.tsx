@@ -3,9 +3,11 @@ import styled from 'styled-components';
 import StyledH1 from '../../atoms/Typography/StyledH1';
 import allColors from '../../../constants/allColors';
 import LoginInput from './LoginInput';
+import Button from '../../atoms/Buttons/Button';
+import LoginParagrph from './LoginParagraph';
 
 const LoginWrapper = styled.div`
-    height: 66vh;
+    height: 70vh;
     width: 25vw;
     background-color: white;
     border-radius: 2px;
@@ -44,10 +46,24 @@ const LoginForm = () => {
             </div>
             <BottomWrapper>
                 <LoginInput
+                    labelText="Email"
                     id="emailInput"
                     placeholderText="Type your email..."
                     iconPath={require('../../../assets/SVGs/email.svg')}
                 />
+                <LoginInput
+                    labelText="Password"
+                    id="emailInput"
+                    placeholderText="Type your password..."
+                    iconPath={require('../../../assets/SVGs/closed.svg')}
+                />
+                <LoginParagrph
+                    firstPart="Don't have an account ? "
+                    secondPart="Sign In Here"
+                    linkPath="/"
+                    color={allColors.mediumBlue}
+                />
+                <Button secondary>Log In</Button>
             </BottomWrapper>
         </LoginWrapper>
     );

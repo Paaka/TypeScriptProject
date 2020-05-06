@@ -1,7 +1,11 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import allColors from '../../../constants/allColors';
 
-const Button = styled.div`
+interface IButton {
+    secondary?: boolean;
+}
+
+const Button = styled.div<IButton>`
     display: flex;
     align-items: center;
     justify-content: center;
@@ -18,6 +22,16 @@ const Button = styled.div`
     width: 80%;
     flex: none;
     height: 2rem;
+
+    ${({ secondary }) =>
+        secondary &&
+        css`
+            background-image: linear-gradient(
+                to right bottom,
+                ${allColors.mediumBlue},
+                ${allColors.borderLightBlue}
+            );
+        `}
 `;
 
 export default Button;

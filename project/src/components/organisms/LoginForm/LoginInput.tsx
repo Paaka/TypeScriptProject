@@ -7,19 +7,21 @@ interface ILoginInput {
     iconPath: string;
     placeholderText: string;
     id: string;
+    labelText: string;
 }
 
 const Wrapper = styled.div`
     width: 90%;
     border-bottom: 2px solid ${allColors.grey};
     padding-bottom: 10px;
+    margin-bottom: 15px;
 `;
 
 const StyledInput = styled.input`
     font-family: 'Montserrat', sans-serif;
     border: none;
     outline: none;
-    width: 90%;
+    width: 85%;
     font-size: 18px;
     margin-left: 5px;
     font-weight: 600;
@@ -31,28 +33,49 @@ const StyledInput = styled.input`
 
 const StyledLabel = styled.label`
     font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    margin-left: 5px;
+    color: ${allColors.darkGrey};
+    transition: color 0.25s;
 
     ${StyledInput}:focus ~ & {
-        font-size: 14px;
-        color: #5264ae;
+        color: royalblue;
     }
 `;
 
 const RowWrapper = styled.div`
     display: flex;
+    align-items: center;
+    justify-content: space-evenly;
 `;
 
-const LoginInput: FC<ILoginInput> = ({ iconPath, placeholderText, id }) => {
+const InputAndLabelWrapper = styled.div`
+    display: flex;
+    flex-direction: column-reverse;
+    margin-left: 2px;
+`;
+
+const LoginInput: FC<ILoginInput> = ({
+    iconPath,
+    placeholderText,
+    labelText,
+    id,
+}) => {
     return (
         <Wrapper>
             <RowWrapper>
                 <DivImage
-                    height={25}
-                    width={25}
+                    pHorizontal={12}
+                    height={20}
+                    width={20}
+                    bgSize={21}
                     imagePath={iconPath}
                 ></DivImage>
-                <StyledInput id={id} placeholder={placeholderText} />
-                <StyledLabel htmlFor={id}>Hi</StyledLabel>
+                <InputAndLabelWrapper>
+                    <StyledInput id={id} placeholder={placeholderText} />
+                    <StyledLabel htmlFor={id}>{labelText}</StyledLabel>
+                </InputAndLabelWrapper>
             </RowWrapper>
         </Wrapper>
     );
