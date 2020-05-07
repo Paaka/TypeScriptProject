@@ -1,3 +1,9 @@
+## V.0.1.2 May 07,2020
+
+**Added**
+
+-   SignInForm
+
 ## V.0.1.1 May 05,2020
 
 **Added**

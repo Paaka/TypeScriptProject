@@ -8,6 +8,7 @@ interface ILoginInput {
     placeholderText: string;
     id: string;
     labelText: string;
+    color: string;
 }
 
 const Wrapper = styled.div`
@@ -40,7 +41,7 @@ const StyledLabel = styled.label`
     transition: color 0.25s;
 
     ${StyledInput}:focus ~ & {
-        color: royalblue;
+        color: ${({ color }) => color};
     }
 `;
 
@@ -61,6 +62,7 @@ const LoginInput: FC<ILoginInput> = ({
     placeholderText,
     labelText,
     id,
+    color,
 }) => {
     return (
         <Wrapper>
@@ -74,7 +76,9 @@ const LoginInput: FC<ILoginInput> = ({
                 ></DivImage>
                 <InputAndLabelWrapper>
                     <StyledInput id={id} placeholder={placeholderText} />
-                    <StyledLabel htmlFor={id}>{labelText}</StyledLabel>
+                    <StyledLabel color={color} htmlFor={id}>
+                        {labelText}
+                    </StyledLabel>
                 </InputAndLabelWrapper>
             </RowWrapper>
         </Wrapper>

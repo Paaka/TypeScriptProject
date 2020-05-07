@@ -11,6 +11,7 @@ import SettingsView from './views/SettingsView';
 import RaportsView from './views/RaportsView';
 import ScheduleView from './views/ScheduleView';
 import LoginView from './views/LoginView';
+import SignInView from './views/SignInView';
 
 function App() {
     return (
@@ -34,6 +35,9 @@ function App() {
                     </Route>
                     <Route path="/Login">
                         <LoginView></LoginView>
+                    </Route>
+                    <Route path="/SignIn">
+                        <SignInView></SignInView>
                     </Route>
                 </Switch>
             </Router>

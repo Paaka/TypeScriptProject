@@ -27,7 +27,7 @@ const StyledP = styled.p<IStyledP>`
         css`
             font-size: 12px;
             font-weight: 700;
-            margin-bottom: 10px;
+            margin-bottom: 3px;
         `}
 `;
 

@@ -46,22 +46,24 @@ const LoginForm = () => {
             </div>
             <BottomWrapper>
                 <LoginInput
+                    color="royalblue"
                     labelText="Email"
                     id="emailInput"
                     placeholderText="Type your email..."
                     iconPath={require('../../../assets/SVGs/email.svg')}
                 />
                 <LoginInput
+                    color="royalblue"
                     labelText="Password"
                     id="emailInput"
                     placeholderText="Type your password..."
                     iconPath={require('../../../assets/SVGs/closed.svg')}
                 />
                 <LoginParagrph
+                    color="royalblue"
                     firstPart="Don't have an account ? "
                     secondPart="Sign In Here"
                     linkPath="/"
-                    color={allColors.mediumBlue}
                 />
                 <Button secondary>Log In</Button>
             </BottomWrapper>
