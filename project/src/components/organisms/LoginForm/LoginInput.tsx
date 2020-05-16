@@ -9,6 +9,7 @@ interface ILoginInput {
     id: string;
     labelText: string;
     color: string;
+    type?: string;
 }
 
 const Wrapper = styled.div`
@@ -62,6 +63,7 @@ const LoginInput: FC<ILoginInput> = ({
     placeholderText,
     labelText,
     id,
+    type,
     color,
 }) => {
     return (
@@ -75,7 +77,11 @@ const LoginInput: FC<ILoginInput> = ({
                     imagePath={iconPath}
                 ></DivImage>
                 <InputAndLabelWrapper>
-                    <StyledInput id={id} placeholder={placeholderText} />
+                    <StyledInput
+                        type={type}
+                        id={id}
+                        placeholder={placeholderText}
+                    />
                     <StyledLabel color={color} htmlFor={id}>
                         {labelText}
                     </StyledLabel>

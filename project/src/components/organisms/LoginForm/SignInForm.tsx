@@ -58,6 +58,7 @@ const SignInForm = () => {
                     iconPath={require('../../../assets/SVGs/email.svg')}
                     labelText="email"
                     placeholderText="Type your email..."
+                    type="email"
                 ></LoginInput>
                 <LoginInput
                     color={allColors.green}
@@ -65,6 +66,7 @@ const SignInForm = () => {
                     iconPath={require('../../../assets/SVGs/closed.svg')}
                     labelText="Password"
                     placeholderText="Type your password..."
+                    type="password"
                 ></LoginInput>
                 <LoginInput
                     color={allColors.green}
@@ -72,6 +74,7 @@ const SignInForm = () => {
                     iconPath={require('../../../assets/SVGs/closed.svg')}
                     labelText="Password"
                     placeholderText="Confirm your password..."
+                    type="password"
                 ></LoginInput>
                 <LoginParagrph
                     linkPath="/LogIn"
