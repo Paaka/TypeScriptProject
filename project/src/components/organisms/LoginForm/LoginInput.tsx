@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import styled from 'styled-components';
 import allColors from '../../../constants/allColors';
 import DivImage from '../../atoms/DivImage';
@@ -10,6 +10,7 @@ interface ILoginInput {
     labelText: string;
     color: string;
     type?: string;
+    getInputValue: (val: string) => void;
 }
 
 const Wrapper = styled.div`
@@ -65,7 +66,12 @@ const LoginInput: FC<ILoginInput> = ({
     id,
     type,
     color,
+    getInputValue,
 }) => {
+    const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+        getInputValue(e.target.value);
+    };
+
     return (
         <Wrapper>
             <RowWrapper>
@@ -81,6 +87,7 @@ const LoginInput: FC<ILoginInput> = ({
                         type={type}
                         id={id}
                         placeholder={placeholderText}
+                        onChange={onChangeHandler}
                     />
                     <StyledLabel color={color} htmlFor={id}>
                         {labelText}

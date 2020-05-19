@@ -36,6 +36,14 @@ const BottomWrapper = styled.div`
 `;
 
 const LoginForm = () => {
+    const getValue = (val: string) => {
+        console.log('xd');
+    };
+
+    const getValue2 = (val: string) => {
+        console.log('xdd2');
+    };
+
     return (
         <LoginWrapper>
             <div>
@@ -46,6 +54,7 @@ const LoginForm = () => {
             </div>
             <BottomWrapper>
                 <LoginInput
+                    getInputValue={getValue}
                     color="royalblue"
                     labelText="Email"
                     id="emailInput"
@@ -53,6 +62,7 @@ const LoginForm = () => {
                     iconPath={require('../../../assets/SVGs/email.svg')}
                 />
                 <LoginInput
+                    getInputValue={getValue}
                     color="royalblue"
                     labelText="Password"
                     id="emailInput"

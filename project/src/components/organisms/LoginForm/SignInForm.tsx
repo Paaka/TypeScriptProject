@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import StyledH1 from '../../atoms/Typography/StyledH1';
 import allColors from '../../../constants/allColors';
@@ -27,7 +27,7 @@ const StyledParagraph = styled.div`
     margin-top: 10px;
 `;
 
-const FormItemsWrapper = styled.div`
+const FormItemsWrapper = styled.form`
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -45,14 +45,36 @@ const StyledButton = styled(Button)`
 `;
 
 const SignInForm = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [password2, setPassword2] = useState('');
+
+    const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        console.log(email, password, password2);
+    };
+
+    const getEmailValue = (val: string) => {
+        setEmail(val);
+    };
+    const getPassword = (val: string) => {
+        setPassword(val);
+    };
+
+    const getPassword2 = (val: string) => {
+        setPassword2(val);
+    };
+
     return (
         <Wrapper>
             <div>
                 <StyledH1 color={allColors.green}>Welcome</StyledH1>
                 <StyledParagraph>Please, sign to continue</StyledParagraph>
             </div>
-            <FormItemsWrapper>
+            <FormItemsWrapper onSubmit={submitHandler}>
                 <LoginInput
+                    getInputValue={getEmailValue}
                     color={allColors.green}
                     id="signInEmail"
                     iconPath={require('../../../assets/SVGs/email.svg')}
@@ -61,16 +83,18 @@ const SignInForm = () => {
                     type="email"
                 ></LoginInput>
                 <LoginInput
+                    getInputValue={getPassword}
                     color={allColors.green}
-                    id="signInEmail"
+                    id="signInpassword1"
                     iconPath={require('../../../assets/SVGs/closed.svg')}
                     labelText="Password"
                     placeholderText="Type your password..."
                     type="password"
                 ></LoginInput>
                 <LoginInput
+                    getInputValue={getPassword2}
                     color={allColors.green}
-                    id="signInEmail"
+                    id="signInPassword2"
                     iconPath={require('../../../assets/SVGs/closed.svg')}
                     labelText="Password"
                     placeholderText="Confirm your password..."
@@ -82,7 +106,7 @@ const SignInForm = () => {
                     secondPart="Log In here"
                     color={allColors.green}
                 ></LoginParagrph>
-                <StyledButton>Sign In</StyledButton>
+                <button type="submit">Hello</button>
             </FormItemsWrapper>
         </Wrapper>
     );

@@ -1,6 +1,7 @@
 import * as types from '../actions/types';
 import List, { IList } from '../models/List';
 import Note, { INote } from '../models/Note';
+import axios from 'axios';
 
 const initialState: IMainState = {
     lists: [],
@@ -17,6 +18,12 @@ interface IMainState {
 const listsReducer = (state = initialState, action: any) => {
     switch (action.type) {
         case types.ADD_LIST: {
+            axios
+                .post('http://localhost:8080/notes', {
+                    listTitle: action.payload.content,
+                    dashboardID: action.payload.dashboardID,
+                })
+                .then((res) => console.log(res));
             return {
                 ...state,
                 lists: [
@@ -52,6 +59,8 @@ const listsReducer = (state = initialState, action: any) => {
             };
         }
         case types.ADD_NOTE: {
+            console.log(action);
+
             return {
                 ...state,
                 notes: [
