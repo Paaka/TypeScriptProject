@@ -31,12 +31,12 @@ const VerticalSidebar = () => {
         <Sidebar>
             <TopWrapper>
                 <VerticalSidebarItem
-                    path="/"
+                    path="/Dashboards"
                     color={allColors.lightBlue}
                     iconPath={require('../../../assets/SVGs/dashboardGrey.svg')}
                     iconPathActive={require('../../../assets/SVGs/dashboard.svg')}
                 >
-                    Boards
+                    Dashboards
                 </VerticalSidebarItem>
                 <VerticalSidebarItem
                     path="/Schedule"

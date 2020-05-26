@@ -34,14 +34,7 @@ const MainRouter = () => {
                 {isNull(Token) ? (
                     <Redirect from="/" exact to="/Login"></Redirect>
                 ) : (
-                    <Redirect from="/" exact to="/Boards"></Redirect>
-                )}
-                {!isNull(Token) ? (
-                    <Route path="/Boards">
-                        <BoardView></BoardView>
-                    </Route>
-                ) : (
-                    <Redirect from="/Boards" exact to="/Login"></Redirect>
+                    <Redirect from="/" exact to="/Dashboards"></Redirect>
                 )}
                 {!isNull(Token) ? (
                     <Route path="/Dashboards">
@@ -49,6 +42,13 @@ const MainRouter = () => {
                     </Route>
                 ) : (
                     <Redirect from="/Dashboards" exact to="/Login"></Redirect>
+                )}
+                {!isNull(Token) ? (
+                    <Route path="/Boards">
+                        <BoardView></BoardView>
+                    </Route>
+                ) : (
+                    <Redirect from="/Boards" exact to="/Login"></Redirect>
                 )}
                 {!isNull(Token) ? (
                     <Route path="/Settings">
@@ -77,14 +77,14 @@ const MainRouter = () => {
                         <LoginView></LoginView>
                     </Route>
                 ) : (
-                    <Redirect from="/Login" exact to="/Boards"></Redirect>
+                    <Redirect from="/Login" exact to="/Dashboards"></Redirect>
                 )}
                 {isNull(Token) ? (
                     <Route path="/SignIn">
                         <SignInView></SignInView>
                     </Route>
                 ) : (
-                    <Redirect from="/SignIn" exact to="/Boards"></Redirect>
+                    <Redirect from="/SignIn" exact to="/Dashboards"></Redirect>
                 )}
             </Switch>
         </Router>

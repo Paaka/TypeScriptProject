@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import styled from 'styled-components';
 import StyledH1 from '../../atoms/Typography/StyledH1';
@@ -6,6 +7,7 @@ import allColors from '../../../constants/allColors';
 import LoginInput from './LoginInput';
 import LoginParagrph from './LoginParagraph';
 import Button from '../../atoms/Buttons/Button';
+import { logInUser } from '../../../actions';
 
 const Wrapper = styled.div`
     height: 70vh;
@@ -37,6 +39,8 @@ const FormItemsWrapper = styled.form`
 `;
 
 const SignInForm = () => {
+    const dispatch = useDispatch();
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [password2, setPassword2] = useState('');
@@ -51,7 +55,9 @@ const SignInForm = () => {
                     email,
                     password,
                 })
-                .then((result) => console.log(result))
+                .then((result) =>
+                    dispatch(logInUser(result.data.user, result.data.token))
+                )
                 .catch((e) => console.log(e));
         }
     };
