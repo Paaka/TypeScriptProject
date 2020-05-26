@@ -9,3 +9,5 @@ export const DELETE_LIST = 'DELETE_LIST';
 export const ADD_NOTE = 'ADD_NOTE';
 
 export const DRAG_NOTE = 'DRAG_NOTE';
+
+export const LOGIN_USER = 'LOGIN_USER';

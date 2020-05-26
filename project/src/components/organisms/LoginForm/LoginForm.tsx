@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
+import { logInUser } from '../../../actions/index';
 import StyledH1 from '../../atoms/Typography/StyledH1';
 import allColors from '../../../constants/allColors';
 import LoginInput from './LoginInput';
-import Button from '../../atoms/Buttons/Button';
 import LoginParagrph from './LoginParagraph';
+import Axios from 'axios';
 
 const LoginWrapper = styled.div`
     height: 70vh;
@@ -36,12 +38,34 @@ const BottomWrapper = styled.div`
 `;
 
 const LoginForm = () => {
-    const getValue = (val: string) => {
-        console.log('xd');
+    const dispatch = useDispatch();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const getEmail = (val: string) => {
+        setEmail(val);
     };
 
-    const getValue2 = (val: string) => {
-        console.log('xdd2');
+    const getPassword = (val: string) => {
+        setPassword(val);
+    };
+
+    const onSubmitHandler = (e: React.FormEvent) => {
+        e.preventDefault();
+
+        Axios.post('http://localhost:9000/users/login', {
+            email,
+            password,
+        })
+            .then((res) => {
+                const response = res.data;
+                console.log(response);
+                if (res.data.token) {
+                    dispatch(logInUser(res.data.user, res.data.token));
+                }
+            })
+            .catch((err) => console.log(err));
+        console.log(email + password);
     };
 
     return (
@@ -53,29 +77,31 @@ const LoginForm = () => {
                 <StyledParagraph>Please Login to continue</StyledParagraph>
             </div>
             <BottomWrapper>
-                <LoginInput
-                    getInputValue={getValue}
-                    color="royalblue"
-                    labelText="Email"
-                    id="emailInput"
-                    placeholderText="Type your email..."
-                    iconPath={require('../../../assets/SVGs/email.svg')}
-                />
-                <LoginInput
-                    getInputValue={getValue}
-                    color="royalblue"
-                    labelText="Password"
-                    id="emailInput"
-                    placeholderText="Type your password..."
-                    iconPath={require('../../../assets/SVGs/closed.svg')}
-                />
-                <LoginParagrph
-                    color="royalblue"
-                    firstPart="Don't have an account ? "
-                    secondPart="Sign In Here"
-                    linkPath="/"
-                />
-                <Button secondary>Log In</Button>
+                <form onSubmit={onSubmitHandler}>
+                    <LoginInput
+                        getInputValue={getEmail}
+                        color="royalblue"
+                        labelText="Email"
+                        id="emailInput"
+                        placeholderText="Type your email..."
+                        iconPath={require('../../../assets/SVGs/email.svg')}
+                    />
+                    <LoginInput
+                        getInputValue={getPassword}
+                        color="royalblue"
+                        labelText="Password"
+                        id="emailInput"
+                        placeholderText="Type your password..."
+                        iconPath={require('../../../assets/SVGs/closed.svg')}
+                    />
+                    <LoginParagrph
+                        color="royalblue"
+                        firstPart="Don't have an account ? "
+                        secondPart="Sign In Here"
+                        linkPath="/SignIn"
+                    />
+                    <button type="submit">Log In</button>
+                </form>
             </BottomWrapper>
         </LoginWrapper>
     );

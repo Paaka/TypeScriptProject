@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import styled from 'styled-components';
 import StyledH1 from '../../atoms/Typography/StyledH1';
 import allColors from '../../../constants/allColors';
@@ -35,15 +36,6 @@ const FormItemsWrapper = styled.form`
     width: 100%;
 `;
 
-const StyledButton = styled(Button)`
-    background-image: linear-gradient(
-        to bottom right,
-        ${allColors.greenBlue},
-        ${allColors.borderGreen}
-    );
-    margin-top: 0px;
-`;
-
 const SignInForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -53,6 +45,15 @@ const SignInForm = () => {
         e.preventDefault();
 
         console.log(email, password, password2);
+        if (password === password2) {
+            axios
+                .post('http://localhost:9000/users', {
+                    email,
+                    password,
+                })
+                .then((result) => console.log(result))
+                .catch((e) => console.log(e));
+        }
     };
 
     const getEmailValue = (val: string) => {

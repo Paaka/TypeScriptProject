@@ -14,6 +14,7 @@
         "@types/react-router-dom": "^5.1.4",
         "@types/styled-components": "^5.0.1",
         "axios": "^0.19.2",
+        "bcryptjs": "^2.4.3",
         "express": "^4.17.1",
         "mongoose": "^5.9.14",
         "react": "^16.13.1",
@@ -47,5 +48,5 @@
             "last 1 safari version"
         ]
     },
-    "proxy": "http://localhost:8080"
+    "proxy": "http://localhost:9000"
 }

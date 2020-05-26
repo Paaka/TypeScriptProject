@@ -57,3 +57,13 @@ export const addBoard = (title: string) => {
         },
     };
 };
+
+export const logInUser = (user: object, token: string) => {
+    return {
+        type: types.LOGIN_USER,
+        payload: {
+            user,
+            token,
+        },
+    };
+};

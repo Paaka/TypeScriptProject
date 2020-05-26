@@ -7,23 +7,21 @@ const initialState: IMainState = {
     lists: [],
     notes: [],
     dashboards: [{ id: 0 }],
+    user: {},
+    token: null,
 };
 
 interface IMainState {
     lists: Array<IList>;
     notes: Array<INote>;
     dashboards: Array<any>;
+    user: object;
+    token: string | null;
 }
 
 const listsReducer = (state = initialState, action: any) => {
     switch (action.type) {
         case types.ADD_LIST: {
-            axios
-                .post('http://localhost:8080/notes', {
-                    listTitle: action.payload.content,
-                    dashboardID: action.payload.dashboardID,
-                })
-                .then((res) => console.log(res));
             return {
                 ...state,
                 lists: [
@@ -60,7 +58,13 @@ const listsReducer = (state = initialState, action: any) => {
         }
         case types.ADD_NOTE: {
             console.log(action);
-
+            axios
+                .post('http://localhost:9000/notes', {
+                    ListID: action.payload.listID,
+                    content: action.payload.content,
+                })
+                .then((res) => console.log(res))
+                .catch((err) => console.log(err));
             return {
                 ...state,
                 notes: [
@@ -84,6 +88,13 @@ const listsReducer = (state = initialState, action: any) => {
                         return note;
                     }
                 }),
+            };
+        }
+        case types.LOGIN_USER: {
+            return {
+                ...state,
+                token: action.payload.token,
+                user: action.payload.user,
             };
         }
         default:
