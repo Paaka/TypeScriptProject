@@ -37,6 +37,24 @@ const BottomWrapper = styled.div`
     width: 100%;
 `;
 
+const StyledButton = styled.button`
+    width: 90%;
+    padding: 5px 0px;
+    border: none;
+    background-color: ${allColors.lightBlue};
+    color: white;
+    border-radius: 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    margin-top: 10px;
+    text-transform: uppercase;
+    transition: background-color 0.2s;
+
+    :hover {
+        background-color: ${allColors.mediumBlue};
+    }
+`;
+
 const LoginForm = () => {
     const dispatch = useDispatch();
     const [email, setEmail] = useState('');
@@ -88,6 +106,7 @@ const LoginForm = () => {
                     />
                     <LoginInput
                         getInputValue={getPassword}
+                        type="password"
                         color="royalblue"
                         labelText="Password"
                         id="emailInput"
@@ -100,7 +119,7 @@ const LoginForm = () => {
                         secondPart="Sign In Here"
                         linkPath="/SignIn"
                     />
-                    <button type="submit">Log In</button>
+                    <StyledButton type="submit">LogIn</StyledButton>
                 </form>
             </BottomWrapper>
         </LoginWrapper>

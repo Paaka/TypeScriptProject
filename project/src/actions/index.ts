@@ -69,3 +69,9 @@ export const logInUser = (user: object, token: string) => {
         },
     };
 };
+
+export const logOutUser = () => {
+    return {
+        type: types.LOGOUT_USER,
+    };
+};

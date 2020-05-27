@@ -37,6 +37,24 @@ const FormItemsWrapper = styled.form`
     width: 100%;
 `;
 
+const StyledButton = styled.button`
+    width: 90%;
+    padding: 5px 0px;
+    border: none;
+    background-color: ${allColors.green};
+    color: white;
+    border-radius: 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    margin-top: 3px;
+    text-transform: uppercase;
+    transition: background-color 0.2s;
+
+    :hover {
+        background-color: ${allColors.greenBlue};
+    }
+`;
+
 const SignInForm = () => {
     const dispatch = useDispatch();
 
@@ -112,7 +130,7 @@ const SignInForm = () => {
                     secondPart="Log In here"
                     color={allColors.green}
                 ></LoginParagrph>
-                <button type="submit">Hello</button>
+                <StyledButton type="submit">Sign in</StyledButton>
             </FormItemsWrapper>
         </Wrapper>
     );

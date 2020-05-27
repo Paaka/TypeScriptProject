@@ -92,20 +92,6 @@ const ListItem: FC<IListItem> = (props) => {
         //dispatch(addNote(props.list.ID, str));
     };
 
-    useEffect(() => {
-        const headers = { Authorization: `Bearer ${Token}` };
-        Axios.get(`http://localhost:9000/notes`, { headers })
-            .then((res) => {
-                const arr: Array<any> = res.data;
-                if (allNotes.length !== arr.length) {
-                    arr.forEach((note) =>
-                        dispatch(addNote(note._id, note.listID, note.content))
-                    );
-                }
-            })
-            .catch((err) => console.log(err));
-    }, [Token, dispatch]);
-
     const updateListTitleHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         dispatch(updateListTitle(props.list.ID, e.target.value));
     };

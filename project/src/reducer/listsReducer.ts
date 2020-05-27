@@ -1,7 +1,6 @@
 import * as types from '../actions/types';
 import List, { IList } from '../models/List';
 import Note, { INote } from '../models/Note';
-import axios from 'axios';
 
 const initialState: IMainState = {
     lists: [],
@@ -98,6 +97,13 @@ const listsReducer = (state = initialState, action: any) => {
             return {
                 ...state,
                 dashboards: [...state.dashboards, { ...action.payload.board }],
+            };
+        }
+        case types.LOGOUT_USER: {
+            return {
+                ...state,
+                user: {},
+                token: null,
             };
         }
         default:

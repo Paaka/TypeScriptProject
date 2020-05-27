@@ -14,7 +14,7 @@ import ListItem from '../components/organisms/ListItem';
 import BoardsList from '../components/molecules/BoardsList';
 import BoardFormModal from '../components/organisms/BoardFormModal';
 import Axios from 'axios';
-import { addList } from '../actions';
+import { addList, addNote } from '../actions';
 
 interface IWrapper {
     width: number;
@@ -33,6 +33,7 @@ const BoardView = () => {
     const useSelector: TypedUseSelectorHook<RootState> = useReduxSelector;
     const lists = useSelector((state) => state.lists);
     const Token = useSelector((state) => state.token);
+    const allNotes = useSelector((state) => state.notes);
 
     const dashID = useLocation().pathname.replace('/boards/', '');
     const dispatch = useDispatch();
@@ -47,6 +48,17 @@ const BoardView = () => {
                         dispatch(
                             addList(list.listTitle, list.listOwner, list._id)
                         )
+                    );
+                }
+            })
+            .then((res) => {
+                return Axios.get(`http://localhost:9000/notes`, { headers });
+            })
+            .then((res) => {
+                const arr: Array<any> = res.data;
+                if (allNotes.length !== arr.length) {
+                    arr.forEach((note) =>
+                        dispatch(addNote(note._id, note.listID, note.content))
                     );
                 }
             })
@@ -66,7 +78,6 @@ const BoardView = () => {
         <MainTemplate>
             <ColumnWrapper width={calculateWidth()}>
                 <BoardsList>Board1</BoardsList>
-                {console.log(lists)}
                 {lists.map((list) => {
                     if (list.dashboardID === dashID) {
                         return <ListItem key={list.ID} list={list} />;
