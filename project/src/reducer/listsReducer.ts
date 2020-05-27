@@ -28,7 +28,8 @@ const listsReducer = (state = initialState, action: any) => {
                     ...state.lists,
                     new List(
                         action.payload.content,
-                        action.payload.dashboardID
+                        action.payload.dashboardID,
+                        action.payload.id
                     ),
                 ],
             };
@@ -57,19 +58,15 @@ const listsReducer = (state = initialState, action: any) => {
             };
         }
         case types.ADD_NOTE: {
-            console.log(action);
-            axios
-                .post('http://localhost:9000/notes', {
-                    ListID: action.payload.listID,
-                    content: action.payload.content,
-                })
-                .then((res) => console.log(res))
-                .catch((err) => console.log(err));
             return {
                 ...state,
                 notes: [
                     ...state.notes,
-                    new Note(action.payload.listID, action.payload.content),
+                    new Note(
+                        action.payload.id,
+                        action.payload.listID,
+                        action.payload.content
+                    ),
                 ],
             };
         }

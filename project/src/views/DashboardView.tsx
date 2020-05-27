@@ -1,16 +1,18 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect } from 'react';
 import {
     useDispatch,
     useSelector as useReduxSelector,
     TypedUseSelectorHook,
 } from 'react-redux';
+import styled from 'styled-components';
+import Axios from 'axios';
+
 import { addBoard } from '../actions/index';
 import { RootState } from '../store/index';
+
 import MainTemplate from '../templates/MainTemplate';
 import DashboardItem from '../components/molecules/SingleItems/DashboardItem';
-import styled from 'styled-components';
 import DashboardFormModal from '../components/organisms/BoardFormModal';
-import Axios from 'axios';
 
 interface IDashboardView {}
 
@@ -24,7 +26,6 @@ const Wrapper = styled.div`
 
 const DashboardView: FC<IDashboardView> = () => {
     const dispatch = useDispatch();
-    const [boards, setBoards] = useState([]);
     const useSelector: TypedUseSelectorHook<RootState> = useReduxSelector;
     const Dashboards = useSelector((state) => state.dashboards);
     const Token = useSelector((state) => state.token);
@@ -34,7 +35,9 @@ const DashboardView: FC<IDashboardView> = () => {
         Axios.get('http://localhost:9000/Dashboards', { headers })
             .then((res) => {
                 const arr: Array<Object> = res.data;
-                arr.forEach((board) => dispatch(addBoard(board)));
+                if (Dashboards.length !== arr.length) {
+                    arr.forEach((board) => dispatch(addBoard(board)));
+                }
             })
             .catch((err) => console.log(err));
     }, [Token]);
@@ -43,7 +46,9 @@ const DashboardView: FC<IDashboardView> = () => {
         <MainTemplate>
             <Wrapper>
                 {Dashboards.map((dashboard) => (
-                    <DashboardItem>{dashboard.title}</DashboardItem>
+                    <DashboardItem id={dashboard._id}>
+                        {dashboard.title}
+                    </DashboardItem>
                 ))}
                 <DashboardFormModal></DashboardFormModal>
             </Wrapper>

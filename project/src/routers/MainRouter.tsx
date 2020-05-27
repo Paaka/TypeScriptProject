@@ -44,11 +44,11 @@ const MainRouter = () => {
                     <Redirect from="/Dashboards" exact to="/Login"></Redirect>
                 )}
                 {!isNull(Token) ? (
-                    <Route path="/Boards">
+                    <Route path="/Boards/:id">
                         <BoardView></BoardView>
                     </Route>
                 ) : (
-                    <Redirect from="/Boards" exact to="/Login"></Redirect>
+                    <Redirect from="/Boards" to="/Login"></Redirect>
                 )}
                 {!isNull(Token) ? (
                     <Route path="/Settings">

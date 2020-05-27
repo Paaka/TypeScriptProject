@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import {
     useDispatch,
     useSelector as useReduxSelector,
@@ -20,7 +20,7 @@ import allColors from '../../constants/allColors';
 import ItemForm from '../molecules/ItemForm';
 import SingleNote from '../molecules/SingleNote';
 import ButtonIcon from '../atoms/Buttons/ButtonIcon';
-import { isNull } from 'util';
+import Axios from 'axios';
 
 interface IListItem {
     list: IList;
@@ -70,10 +70,41 @@ const ListItem: FC<IListItem> = (props) => {
 
     const allNotes = useSelector((state) => state.notes);
     const myNotes = allNotes.filter((note) => note.ListID === props.list.ID);
+    const Token = useSelector((state) => state.token);
 
     const addNoteHandler = (str: string) => {
-        dispatch(addNote(props.list.ID, str));
+        console.log(props.list.ID);
+        const headers = { Authorization: `Bearer ${Token}` };
+        Axios.post(
+            'http://localhost:9000/notes',
+            {
+                content: str,
+                listID: props.list.ID,
+            },
+            { headers }
+        )
+            .then((res) =>
+                dispatch(
+                    addNote(res.data._id, res.data.listID, res.data.content)
+                )
+            )
+            .catch((e) => console.log(e));
+        //dispatch(addNote(props.list.ID, str));
     };
+
+    useEffect(() => {
+        const headers = { Authorization: `Bearer ${Token}` };
+        Axios.get(`http://localhost:9000/notes`, { headers })
+            .then((res) => {
+                const arr: Array<any> = res.data;
+                if (allNotes.length !== arr.length) {
+                    arr.forEach((note) =>
+                        dispatch(addNote(note._id, note.listID, note.content))
+                    );
+                }
+            })
+            .catch((err) => console.log(err));
+    }, [Token, dispatch]);
 
     const updateListTitleHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         dispatch(updateListTitle(props.list.ID, e.target.value));

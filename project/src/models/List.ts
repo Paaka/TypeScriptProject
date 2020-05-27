@@ -9,8 +9,8 @@ class List implements IList {
     listTitle: string;
     dashboardID: string;
 
-    constructor(title: string, dashID: string) {
-        this.ID = Date.now().toString();
+    constructor(title: string, dashID: string, id: string) {
+        this.ID = id;
         this.listTitle = title;
         this.dashboardID = dashID;
     }

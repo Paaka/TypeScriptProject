@@ -9,8 +9,8 @@ class Note implements INote {
     ListID: string;
     content: string;
 
-    constructor(listID: string, text: string) {
-        this.ID = Date.now().toString();
+    constructor(id: string, listID: string, text: string) {
+        this.ID = id;
         this.ListID = listID;
         this.content = text;
     }

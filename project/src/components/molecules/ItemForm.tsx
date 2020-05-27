@@ -8,6 +8,7 @@ import Sizes from '../../constants/Sizes';
 import MainInput from '../atoms/MainInput';
 import ButtonIcon from '../atoms/Buttons/ButtonIcon';
 import DivImage from '../atoms/DivImage';
+import Axios from 'axios';
 
 const Column = styled.div`
     height: 90vh;
@@ -91,6 +92,7 @@ const ItemForm: FC<IItemForm> = (props) => {
 
     const addListHandler = () => {
         props.onClickFn(inputedText);
+
         toggleModalHandler();
     };
 

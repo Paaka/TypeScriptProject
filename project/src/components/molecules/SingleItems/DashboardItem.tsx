@@ -1,8 +1,10 @@
 import React, { FC } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 interface IDashboardItem {
     children: string;
+    id: string;
 }
 
 const Wrapper = styled.div`
@@ -29,9 +31,11 @@ const StyledHeading = styled.h3`
 
 const DashboardItem: FC<IDashboardItem> = (props) => {
     return (
-        <Wrapper>
-            <StyledHeading>{props.children}</StyledHeading>
-        </Wrapper>
+        <Link to={`/boards/${props.id}`}>
+            <Wrapper>
+                <StyledHeading>{props.children}</StyledHeading>
+            </Wrapper>
+        </Link>
     );
 };
 

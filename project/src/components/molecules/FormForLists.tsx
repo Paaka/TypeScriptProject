@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { addList } from '../../actions/index';
@@ -9,6 +9,7 @@ import Sizes from '../../constants/Sizes';
 import MainInput from '../atoms/MainInput';
 import ButtonIcon from '../atoms/Buttons/ButtonIcon';
 import DivImage from '../atoms/DivImage';
+import Axios from 'axios';
 
 const Column = styled.div`
     height: 90vh;
@@ -75,7 +76,12 @@ const ImageWrapper = styled.div`
     justify-content: center;
 `;
 
-const FormForList = () => {
+interface IFormForList {
+    owner: string;
+    token: string;
+}
+
+const FormForList: FC<IFormForList> = (props) => {
     const dispatch = useDispatch();
     const [isOpen, setIsOpen] = useState(false);
     const [inputedText, setInputedText] = useState('');
@@ -90,7 +96,23 @@ const FormForList = () => {
     };
 
     const addListHandler = () => {
-        dispatch(addList(inputedText, '0'));
+        const headers = { Authorization: `Bearer ${props.token}` };
+        Axios.post(
+            'http://localhost:9000/lists',
+            { listTitle: inputedText, listOwner: props.owner },
+            { headers }
+        )
+            .then((res) =>
+                dispatch(
+                    addList(
+                        res.data.listTitle,
+                        res.data.listOwner,
+                        res.data._id
+                    )
+                )
+            )
+            .catch((e) => console.log(e));
+
         onClickHandler();
     };
 
