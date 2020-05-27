@@ -1,9 +1,18 @@
 import React, { useState } from 'react';
+import {
+    useDispatch,
+    useSelector as useReduxSelector,
+    TypedUseSelectorHook,
+} from 'react-redux';
+import { addBoard } from '../../actions/index';
+
+import { RootState } from '../../store/index';
 import styled from 'styled-components';
 import allColors from '../../constants/allColors';
 import DivImage from '../atoms/DivImage';
 import Button from '../atoms/Buttons/Button';
 import MainInput from '../atoms/MainInput';
+import Axios from 'axios';
 
 interface IActive {
     isActive: boolean;
@@ -70,6 +79,10 @@ const FormWrapper = styled.div`
 const BoardFormModal = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [inputedValue, setInputedValue] = useState('');
+    const dispatch = useDispatch();
+    const useSelector: TypedUseSelectorHook<RootState> = useReduxSelector;
+
+    const Token = useSelector((state) => state.token);
 
     const toggleIsOpen = () => {
         setIsOpen(!isOpen);
@@ -80,7 +93,16 @@ const BoardFormModal = () => {
     };
 
     const addBoardHandler = () => {
-        console.log(inputedValue);
+        const headers = { Authorization: `Bearer ${Token}` };
+        Axios.post(
+            'http://localhost:9000/BoardsAPI',
+            { title: inputedValue },
+            {
+                headers: headers,
+            }
+        )
+            .then((res) => dispatch(addBoard(res.data)))
+            .catch((e) => console.log(e));
         setInputedValue('');
     };
 

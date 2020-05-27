@@ -6,7 +6,7 @@ import axios from 'axios';
 const initialState: IMainState = {
     lists: [],
     notes: [],
-    dashboards: [{ id: 0 }],
+    dashboards: [],
     user: {},
     token: null,
 };
@@ -95,6 +95,12 @@ const listsReducer = (state = initialState, action: any) => {
                 ...state,
                 token: action.payload.token,
                 user: action.payload.user,
+            };
+        }
+        case types.ADD_BOARD: {
+            return {
+                ...state,
+                dashboards: [...state.dashboards, { ...action.payload.board }],
             };
         }
         default:

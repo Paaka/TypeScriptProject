@@ -1,26 +1,51 @@
-import React, { FC } from 'react';
-
+import React, { FC, useEffect, useState } from 'react';
+import {
+    useDispatch,
+    useSelector as useReduxSelector,
+    TypedUseSelectorHook,
+} from 'react-redux';
+import { addBoard } from '../actions/index';
+import { RootState } from '../store/index';
 import MainTemplate from '../templates/MainTemplate';
 import DashboardItem from '../components/molecules/SingleItems/DashboardItem';
 import styled from 'styled-components';
+import DashboardFormModal from '../components/organisms/BoardFormModal';
+import Axios from 'axios';
 
 interface IDashboardView {}
 
 const Wrapper = styled.div`
-    margin-top: 10vh;
+    margin-top: 2vh;
+    margin-left: 1vw;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, 22vw);
+    position: absolute;
 `;
 
 const DashboardView: FC<IDashboardView> = () => {
+    const dispatch = useDispatch();
+    const [boards, setBoards] = useState([]);
+    const useSelector: TypedUseSelectorHook<RootState> = useReduxSelector;
+    const Dashboards = useSelector((state) => state.dashboards);
+    const Token = useSelector((state) => state.token);
+
+    useEffect(() => {
+        const headers = { Authorization: `Bearer ${Token}` };
+        Axios.get('http://localhost:9000/Dashboards', { headers })
+            .then((res) => {
+                const arr: Array<Object> = res.data;
+                arr.forEach((board) => dispatch(addBoard(board)));
+            })
+            .catch((err) => console.log(err));
+    }, [Token]);
+
     return (
         <MainTemplate>
             <Wrapper>
-                <DashboardItem>Dashboard1</DashboardItem>
-                <DashboardItem>Dashboard1</DashboardItem>
-                <DashboardItem>Dashboard1</DashboardItem>
-                <DashboardItem>Dashboard1</DashboardItem>
-                <DashboardItem>Dashboard1</DashboardItem>
+                {Dashboards.map((dashboard) => (
+                    <DashboardItem>{dashboard.title}</DashboardItem>
+                ))}
+                <DashboardFormModal></DashboardFormModal>
             </Wrapper>
         </MainTemplate>
     );

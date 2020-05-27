@@ -49,11 +49,11 @@ export const dragNote = (noteID: string, listID: string) => {
     };
 };
 
-export const addBoard = (title: string) => {
+export const addBoard = (board: Object) => {
     return {
         type: types.ADD_BOARD,
         payload: {
-            boardTitle: title,
+            board,
         },
     };
 };

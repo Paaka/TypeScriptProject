@@ -6,7 +6,6 @@ import StyledH1 from '../../atoms/Typography/StyledH1';
 import allColors from '../../../constants/allColors';
 import LoginInput from './LoginInput';
 import LoginParagrph from './LoginParagraph';
-import Button from '../../atoms/Buttons/Button';
 import { logInUser } from '../../../actions';
 
 const Wrapper = styled.div`
