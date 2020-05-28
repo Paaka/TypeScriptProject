@@ -1,6 +1,9 @@
 import * as types from '../actions/types';
 import List, { IList } from '../models/List';
 import Note, { INote } from '../models/Note';
+import { IToken } from '../models/Token';
+import Board, { IBoard } from '../models/Board';
+import { type } from 'os';
 
 const initialState: IMainState = {
     lists: [],
@@ -15,7 +18,7 @@ interface IMainState {
     notes: Array<INote>;
     dashboards: Array<any>;
     user: object;
-    token: string | null;
+    token: IToken | null;
 }
 
 const listsReducer = (state = initialState, action: any) => {
@@ -69,6 +72,14 @@ const listsReducer = (state = initialState, action: any) => {
                 ],
             };
         }
+        case types.DELETE_BOARD: {
+            return {
+                ...state,
+                dashboards: state.dashboards.filter(
+                    (board) => board.id !== action.payload.boardID
+                ),
+            };
+        }
         case types.DRAG_NOTE: {
             console.log(action.payload);
             return {
@@ -96,7 +107,10 @@ const listsReducer = (state = initialState, action: any) => {
         case types.ADD_BOARD: {
             return {
                 ...state,
-                dashboards: [...state.dashboards, { ...action.payload.board }],
+                dashboards: [
+                    ...state.dashboards,
+                    new Board(action.payload.id, action.payload.title),
+                ],
             };
         }
         case types.LOGOUT_USER: {

@@ -41,6 +41,15 @@ export const deleteList = (listID: string) => {
     };
 };
 
+export const deleteBoard = (boardID: string) => {
+    return {
+        type: types.DELETE_BOARD,
+        payload: {
+            boardID,
+        },
+    };
+};
+
 export const dragNote = (noteID: string, listID: string) => {
     return {
         type: types.DRAG_NOTE,
@@ -51,11 +60,13 @@ export const dragNote = (noteID: string, listID: string) => {
     };
 };
 
-export const addBoard = (board: Object) => {
+export const addBoard = (board: any) => {
+    console.log(board);
     return {
         type: types.ADD_BOARD,
         payload: {
-            board,
+            title: board.title,
+            id: board._id,
         },
     };
 };

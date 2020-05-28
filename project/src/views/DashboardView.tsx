@@ -46,7 +46,7 @@ const DashboardView: FC<IDashboardView> = () => {
         <MainTemplate>
             <Wrapper>
                 {Dashboards.map((dashboard) => (
-                    <DashboardItem id={dashboard._id}>
+                    <DashboardItem token={Token} id={dashboard.id}>
                         {dashboard.title}
                     </DashboardItem>
                 ))}

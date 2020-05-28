@@ -89,7 +89,6 @@ const ListItem: FC<IListItem> = (props) => {
                 )
             )
             .catch((e) => console.log(e));
-        //dispatch(addNote(props.list.ID, str));
     };
 
     const updateListTitleHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
