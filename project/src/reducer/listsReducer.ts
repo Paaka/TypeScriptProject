@@ -3,7 +3,7 @@ import List, { IList } from '../models/List';
 import Note, { INote } from '../models/Note';
 import { IToken } from '../models/Token';
 import Board, { IBoard } from '../models/Board';
-import { type } from 'os';
+import User, { IUser } from '../models/User';
 
 const initialState: IMainState = {
     lists: [],
@@ -17,7 +17,7 @@ interface IMainState {
     lists: Array<IList>;
     notes: Array<INote>;
     dashboards: Array<any>;
-    user: object;
+    user: IUser | Object;
     token: IToken | null;
 }
 
@@ -101,7 +101,7 @@ const listsReducer = (state = initialState, action: any) => {
             return {
                 ...state,
                 token: action.payload.token,
-                user: action.payload.user,
+                user: new User(action.payload.user),
             };
         }
         case types.ADD_BOARD: {

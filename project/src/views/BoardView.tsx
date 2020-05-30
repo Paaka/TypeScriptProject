@@ -43,7 +43,7 @@ const BoardView = () => {
         Axios.get(`http://localhost:9000/lists`, { headers })
             .then((res) => {
                 const arr: Array<any> = res.data;
-                if (lists.length !== arr.length) {
+                if (lists.length <= arr.length) {
                     arr.forEach((list) =>
                         dispatch(
                             addList(list.listTitle, list.listOwner, list._id)
@@ -56,7 +56,7 @@ const BoardView = () => {
             })
             .then((res) => {
                 const arr: Array<any> = res.data;
-                if (allNotes.length !== arr.length) {
+                if (allNotes.length <= arr.length) {
                     arr.forEach((note) =>
                         dispatch(addNote(note._id, note.listID, note.content))
                     );

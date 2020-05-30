@@ -73,7 +73,6 @@ const ListItem: FC<IListItem> = (props) => {
     const Token = useSelector((state) => state.token);
 
     const addNoteHandler = (str: string) => {
-        console.log(props.list.ID);
         const headers = { Authorization: `Bearer ${Token}` };
         Axios.post(
             'http://localhost:9000/notes',
@@ -96,7 +95,12 @@ const ListItem: FC<IListItem> = (props) => {
     };
 
     const deleteNoteHandler = () => {
-        dispatch(deleteList(props.list.ID));
+        const headers = { Authorization: `Bearer ${Token}` };
+        Axios.delete(`http://localhost:9000/lists/${props.list.ID}`, {
+            headers,
+        })
+            .then((res) => dispatch(deleteList(props.list.ID)))
+            .catch((err) => console.log(err));
     };
 
     const calculateHeight = () => {
