@@ -50,13 +50,16 @@ const MainRouter = () => {
                 ) : (
                     <Redirect from="/Boards" to="/Login"></Redirect>
                 )}
-                {!isNull(Token) ? (
+                <Route path="/Settings">
+                    <SettingsView></SettingsView>
+                </Route>
+                {/* {!isNull(Token) ? (
                     <Route path="/Settings">
                         <SettingsView></SettingsView>
                     </Route>
                 ) : (
                     <Redirect from="/Settings" exact to="/Login"></Redirect>
-                )}
+                )} */}
                 {!isNull(Token) ? (
                     <Route path="/Raports">
                         <RaportsView></RaportsView>

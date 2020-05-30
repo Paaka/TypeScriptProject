@@ -18,6 +18,7 @@ export default {
     pinkBorder: '#f2c6d0',
     purpule: 'rgb(203,127,235)',
     orange: 'rgb(255,182,79)',
+    orangeRed: 'rgb(255,151,132)',
     orangeDark: '#ec8a00',
     lightGray: 'rgb(230,233,240)',
     listColor: 'rgb(239,242,245)',
