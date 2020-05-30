@@ -50,6 +50,16 @@ export const deleteBoard = (boardID: string) => {
     };
 };
 
+export const updateBoardTitle = (boardID: string, newTitle: string) => {
+    return {
+        type: types.UPDATE_BOARD_TITLE,
+        payload: {
+            boardID,
+            newTitle,
+        },
+    };
+};
+
 export const dragNote = (noteID: string, listID: string) => {
     return {
         type: types.DRAG_NOTE,

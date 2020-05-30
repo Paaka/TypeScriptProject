@@ -14,7 +14,7 @@ import ListItem from '../components/organisms/ListItem';
 import BoardsList from '../components/molecules/BoardsList';
 import BoardFormModal from '../components/organisms/BoardFormModal';
 import Axios from 'axios';
-import { addList, addNote } from '../actions';
+import { addList, addNote, updateBoardTitle } from '../actions';
 
 interface IWrapper {
     width: number;
@@ -34,8 +34,12 @@ const BoardView = () => {
     const lists = useSelector((state) => state.lists);
     const Token = useSelector((state) => state.token);
     const allNotes = useSelector((state) => state.notes);
+    const board = useSelector((state) => state.dashboards);
+
+    const headers = { Authorization: `Bearer ${Token}` };
 
     const dashID = useLocation().pathname.replace('/boards/', '');
+    const thisBoard = board.find((board) => board.id === dashID);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -43,7 +47,7 @@ const BoardView = () => {
         Axios.get(`http://localhost:9000/lists`, { headers })
             .then((res) => {
                 const arr: Array<any> = res.data;
-                if (lists.length <= arr.length) {
+                if (lists.length < arr.length) {
                     arr.forEach((list) =>
                         dispatch(
                             addList(list.listTitle, list.listOwner, list._id)
@@ -56,7 +60,7 @@ const BoardView = () => {
             })
             .then((res) => {
                 const arr: Array<any> = res.data;
-                if (allNotes.length <= arr.length) {
+                if (allNotes.length < arr.length) {
                     arr.forEach((note) =>
                         dispatch(addNote(note._id, note.listID, note.content))
                     );
@@ -74,10 +78,26 @@ const BoardView = () => {
         }
     };
 
+    const updateTitle = (newTitle: string) => {
+        dispatch(updateBoardTitle(dashID, newTitle));
+        Axios.patch(
+            'http://localhost:9000/Boards',
+            {
+                boardID: dashID,
+                newTitle,
+            },
+            { headers }
+        )
+            .then((res) => console.log(res))
+            .catch((err) => console.log(err));
+    };
+
     return (
         <MainTemplate>
             <ColumnWrapper width={calculateWidth()}>
-                <BoardsList>Board1</BoardsList>
+                <BoardsList updateTitleHandler={updateTitle}>
+                    {thisBoard.title}
+                </BoardsList>
                 {lists.map((list) => {
                     if (list.dashboardID === dashID) {
                         return <ListItem key={list.ID} list={list} />;

@@ -72,6 +72,8 @@ const ListItem: FC<IListItem> = (props) => {
     const myNotes = allNotes.filter((note) => note.ListID === props.list.ID);
     const Token = useSelector((state) => state.token);
 
+    const headers = { Authorization: `Bearer ${Token}` };
+
     const addNoteHandler = (str: string) => {
         const headers = { Authorization: `Bearer ${Token}` };
         Axios.post(
@@ -92,10 +94,19 @@ const ListItem: FC<IListItem> = (props) => {
 
     const updateListTitleHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         dispatch(updateListTitle(props.list.ID, e.target.value));
+        Axios.patch(
+            'http://localhost:9000/lists',
+            {
+                listID: props.list.ID,
+                newTitle: e.target.value,
+            },
+            { headers }
+        )
+            .then((res) => console.log())
+            .catch((err) => console.log(err));
     };
 
     const deleteNoteHandler = () => {
-        const headers = { Authorization: `Bearer ${Token}` };
         Axios.delete(`http://localhost:9000/lists/${props.list.ID}`, {
             headers,
         })
@@ -111,7 +122,17 @@ const ListItem: FC<IListItem> = (props) => {
     const dropHandler = (e: React.DragEvent<HTMLDivElement>) => {
         e.preventDefault();
         const card_id = e.dataTransfer.getData('card_id');
-        dispatch(dragNote(card_id, props.list.ID));
+        Axios.patch(
+            'http://localhost:9000/notes',
+            {
+                cardID: card_id,
+                listID: props.list.ID,
+            },
+            { headers }
+        )
+            .then((res) => dispatch(dragNote(card_id, props.list.ID)))
+            .catch((err) => console.log(err));
+
         const el = document.getElementById(card_id);
         if (el !== null) {
             el.style.display = 'block';

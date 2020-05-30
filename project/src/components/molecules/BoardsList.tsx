@@ -6,6 +6,7 @@ import DivImage from '../atoms/DivImage';
 
 interface IBoardsList {
     children: string;
+    updateTitleHandler: (newTitle: string) => void;
 }
 
 interface Iactive {
@@ -22,34 +23,31 @@ const Wrapper = styled.div`
     left: 11vw;
 `;
 
-const StyledText = styled(StyledH1)`
-    margin-left: -15px;
-`;
+const StyledText = styled.input`
+    font-size: 30px;
+    background-color: transparent;
+    border: none;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    margin-top: 5px;
 
-const StyledDivImage = styled(DivImage)<Iactive>`
-    box-sizing: content-box;
-    border-radius: 50%;
-    padding: 5px;
-    background-color: white;
-    transform: rotate(${(props) => (props.isActive ? '180deg' : '0')});
-    transition: transform 0.2s;
+    &:focus {
+        outline: none;
+        border: none;
+    }
 `;
 
 const BoardsList: FC<IBoardsList> = (props) => {
-    const [isOpen, setIsOpen] = useState(false);
+    const [inputedText, setInputedText] = useState(props.children);
 
-    const toggleIsOpen = () => {
-        setIsOpen(!isOpen);
+    const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+        props.updateTitleHandler(e.target.value);
+        setInputedText(e.target.value);
     };
 
     return (
-        <Wrapper onClick={toggleIsOpen}>
-            <StyledText color={allColors.darkGrey}>{props.children}</StyledText>
-            <StyledDivImage
-                isActive={isOpen}
-                bgSize={17}
-                imagePath={require('../../assets/SVGs/down-arrow.svg')}
-            />
+        <Wrapper>
+            <StyledText value={inputedText} onChange={onChangeHandler} />
         </Wrapper>
     );
 };

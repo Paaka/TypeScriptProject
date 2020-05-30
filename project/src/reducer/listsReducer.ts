@@ -120,6 +120,21 @@ const listsReducer = (state = initialState, action: any) => {
                 token: null,
             };
         }
+        case types.UPDATE_BOARD_TITLE: {
+            return {
+                ...state,
+                dashboards: state.dashboards.map((board) => {
+                    if (board.id === action.payload.boardID) {
+                        return {
+                            ...board,
+                            title: action.payload.newTitle,
+                        };
+                    } else {
+                        return board;
+                    }
+                }),
+            };
+        }
         default:
             return state;
     }
