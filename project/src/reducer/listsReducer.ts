@@ -4,6 +4,7 @@ import Note, { INote } from '../models/Note';
 import { IToken } from '../models/Token';
 import Board, { IBoard } from '../models/Board';
 import User, { IUser } from '../models/User';
+import { stringify } from 'querystring';
 
 const initialState: IMainState = {
     lists: [],
@@ -131,6 +132,22 @@ const listsReducer = (state = initialState, action: any) => {
                         };
                     } else {
                         return board;
+                    }
+                }),
+            };
+        }
+        case types.UPDATE_NOTE_TITLE: {
+            const newcontent: string = action.payload.newTitle;
+            return {
+                ...state,
+                notes: state.notes.map((note) => {
+                    if (note.ID === action.payload.noteID) {
+                        return {
+                            ...note,
+                            content: newcontent,
+                        };
+                    } else {
+                        return note;
                     }
                 }),
             };

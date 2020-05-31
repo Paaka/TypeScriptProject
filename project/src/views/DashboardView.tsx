@@ -13,6 +13,7 @@ import { RootState } from '../store/index';
 import MainTemplate from '../templates/MainTemplate';
 import DashboardItem from '../components/molecules/SingleItems/DashboardItem';
 import DashboardFormModal from '../components/organisms/BoardFormModal';
+import allColors from '../constants/allColors';
 
 interface IDashboardView {}
 
@@ -22,6 +23,8 @@ const Wrapper = styled.div`
     display: grid;
     grid-template-columns: repeat(4, 22vw);
     position: absolute;
+
+    background-color: ${allColors.lightGray};
 `;
 
 const DashboardView: FC<IDashboardView> = () => {

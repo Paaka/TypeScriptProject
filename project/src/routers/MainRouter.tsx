@@ -21,12 +21,12 @@ import ScheduleView from '../views/ScheduleView';
 import LoginView from '../views/LoginView';
 import SignInView from '../views/SignInView';
 import { isNull } from 'util';
+import NoteView from '../views/NoteView';
 
 const MainRouter = () => {
     const useSelector: TypedUseSelectorHook<RootState> = useReduxSelector;
 
     const Token = useSelector((state) => state.token);
-    console.log(isNull(Token));
 
     return (
         <Router>
@@ -44,22 +44,26 @@ const MainRouter = () => {
                     <Redirect from="/Dashboards" exact to="/Login"></Redirect>
                 )}
                 {!isNull(Token) ? (
-                    <Route path="/Boards/:id">
+                    <Route path="/Boards/:id" exact>
                         <BoardView></BoardView>
                     </Route>
                 ) : (
                     <Redirect from="/Boards" to="/Login"></Redirect>
                 )}
-                <Route path="/Settings">
-                    <SettingsView></SettingsView>
-                </Route>
-                {/* {!isNull(Token) ? (
+                {!isNull(Token) ? (
+                    <Route path="/Boards/:id/:noteId">
+                        <NoteView></NoteView>
+                    </Route>
+                ) : (
+                    <Redirect from="/Boards" to="/Login"></Redirect>
+                )}
+                {!isNull(Token) ? (
                     <Route path="/Settings">
                         <SettingsView></SettingsView>
                     </Route>
                 ) : (
                     <Redirect from="/Settings" exact to="/Login"></Redirect>
-                )} */}
+                )}
                 {!isNull(Token) ? (
                     <Route path="/Raports">
                         <RaportsView></RaportsView>

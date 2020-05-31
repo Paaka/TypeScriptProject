@@ -15,6 +15,9 @@ import StyledH1 from '../components/atoms/Typography/StyledH1';
 import LoginParagrph from '../components/organisms/LoginForm/LoginParagraph';
 import StyledParagraph from '../components/atoms/Typography/StyledParagraph';
 import Button from '../components/atoms/Buttons/Button';
+import SettingsInput from '../components/atoms/SettingsInput';
+import UserInfo from '../components/molecules/UserInfo';
+import { IUser } from '../models/User';
 
 interface ISettingsView {}
 
@@ -23,18 +26,10 @@ const Wrapper = styled.div`
     height: 90vh;
     display: flex;
     justify-content: space-around;
+    background-color: ${allColors.lightGray};
 `;
 
-const UserInfo = styled.div`
-    width: 40%;
-    margin: 10px;
-    background-color: #f5f5f5;
-    height: 85vh;
-    border-radius: 30px;
-    overflow: hidden;
-`;
-
-const PasswordContainer = styled.div`
+const PasswordContainer = styled.form`
     width: 40%;
     margin: 10px;
     background-image: linear-gradient(
@@ -50,51 +45,6 @@ const PasswordContainer = styled.div`
     padding: 10px;
     align-items: center;
     justify-content: space-around;
-`;
-
-const ColorHeading = styled.div`
-    position: relative;
-    height: 30%;
-    width: 100%;
-    border-bottom: 5px solid white;
-    background-image: linear-gradient(
-        to right bottom,
-        ${allColors.orange},
-        ${allColors.orangeDark}
-    );
-`;
-
-const UserPicture = styled.div`
-    position: absolute;
-    width: 150px;
-    height: 150px;
-    bottom: -75px;
-    background-color: ${allColors.darkGrey};
-    left: 33%;
-    background-size: 100px;
-    background-image: url(${require('../assets/SVGs/user.svg')});
-    border-radius: 50%;
-    border: 5px solid white;
-    background-size: cover;
-    background-position-x: center;
-    background-position-y: center;
-    z-index: 50;
-`;
-
-const UserInfoWrapper = styled.div`
-    width: 100%;
-    height: 100%;
-    margin-top: 16%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-`;
-
-const FlexWrapper = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 20px;
 `;
 
 const StyledInput = styled.input`
@@ -132,6 +82,7 @@ const SettingsView: FC<ISettingsView> = () => {
     const useSelector: TypedUseSelectorHook<RootState> = useReduxSelector;
 
     const Token = useSelector((state) => state.token);
+    const User = useSelector((state) => state.user);
 
     const logOutHandler = () => {
         const headers = { Authorization: `Bearer ${Token}` };
@@ -143,26 +94,9 @@ const SettingsView: FC<ISettingsView> = () => {
     return (
         <MainTemplate>
             <Wrapper>
-                <UserInfo>
-                    <ColorHeading>
-                        <UserPicture></UserPicture>
-                        {/* <BorderToUserPicture></BorderToUserPicture> */}
-                    </ColorHeading>
-                    <UserInfoWrapper>
-                        <FlexWrapper>
-                            <StyledParagraph>Username :</StyledParagraph>
-                            <StyledInput value="M. Hartabus"></StyledInput>
-                        </FlexWrapper>
-                        <FlexWrapper>
-                            <StyledParagraph>Email :</StyledParagraph>
-                            <StyledInput value="Email@gmail.con"></StyledInput>
-                        </FlexWrapper>
-                        <StyledBtn onClick={logOutHandler}>Log out</StyledBtn>
-                    </UserInfoWrapper>
-                </UserInfo>
+                <UserInfo user={User}></UserInfo>
                 <PasswordContainer>
                     <StyledH1 color="white">Change your password :</StyledH1>
-
                     <StyledInput placeholder="Current Password"></StyledInput>
                     <StyledInput placeholder="New Password"></StyledInput>
                     <StyledInput placeholder="New Password Again"></StyledInput>

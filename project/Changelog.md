@@ -1,3 +1,9 @@
+## V.0.3 May 31,2020
+
+**Added**
+
+-   Single note View
+
 ## V.0.1.2 May 07,2020
 
 **Added**

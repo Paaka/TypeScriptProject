@@ -70,6 +70,16 @@ export const dragNote = (noteID: string, listID: string) => {
     };
 };
 
+export const updateNoteTitle = (noteID: string, newTitle: string) => {
+    return {
+        type: types.UPDATE_NOTE_TITLE,
+        payload: {
+            noteID,
+            newTitle,
+        },
+    };
+};
+
 export const addBoard = (board: any) => {
     console.log(board);
     return {

@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 import { INote } from '../../models/Note';
 import StyledParagraph from '../atoms/Typography/StyledParagraph';
+import { useHistory, useLocation } from 'react-router-dom';
 
 const Wrapper = styled.div`
     width: 80%;
@@ -21,9 +22,10 @@ interface selectProtected {
 }
 
 const SingleNote: FC<ISingleNote> = (props) => {
+    const History = useHistory();
+    const location = useLocation();
     const dragOverHandler = (e: React.DragEvent<HTMLDivElement>) => {
         e.stopPropagation();
-        console.log(e);
     };
 
     const dragHandler = (e: React.DragEvent<HTMLDivElement>) => {
@@ -45,6 +47,9 @@ const SingleNote: FC<ISingleNote> = (props) => {
 
     return (
         <Wrapper
+            onClick={() =>
+                History.push(`${location.pathname}/${props.note.ID}`)
+            }
             draggable="true"
             id={props.note.ID}
             onDragStart={dragHandler}
