@@ -12,16 +12,23 @@ interface IDashboardItem {
     children: string;
     id: string;
     token: IToken;
+    primary: string;
+    secondary: string;
 }
 
-const Wrapper = styled.div`
+interface ITwoColors {
+    primary: string;
+    secondary: string;
+}
+
+const Wrapper = styled.div<ITwoColors>`
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
     background-image: linear-gradient(
         to left top,
-        ${allColors.lightBlue},
-        ${allColors.mediumBlue}
+        ${({ primary }) => primary},
+        ${({ secondary }) => secondary}
     );
     height: 150px;
     padding: 10px 5px;
@@ -56,7 +63,7 @@ const DashboardItem: FC<IDashboardItem> = (props) => {
     };
 
     return (
-        <Wrapper>
+        <Wrapper primary={props.primary} secondary={props.secondary}>
             <Link style={{ textDecoration: 'none' }} to={`/boards/${props.id}`}>
                 <StyledHeading>{props.children}</StyledHeading>
             </Link>

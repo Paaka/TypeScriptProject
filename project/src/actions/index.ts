@@ -110,6 +110,8 @@ export const addBoard = (board: any) => {
     return {
         type: types.ADD_BOARD,
         payload: {
+            secondary: board.secondaryColor,
+            primary: board.primaryColor,
             title: board.title,
             id: board._id,
         },

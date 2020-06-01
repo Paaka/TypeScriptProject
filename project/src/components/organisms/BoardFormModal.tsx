@@ -13,6 +13,7 @@ import DivImage from '../atoms/DivImage';
 import Button from '../atoms/Buttons/Button';
 import MainInput from '../atoms/MainInput';
 import Axios from 'axios';
+import ColorsForm from '../molecules/ColorsForm';
 
 interface IActive {
     isActive: boolean;
@@ -79,10 +80,24 @@ const FormWrapper = styled.div`
 const BoardFormModal = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [inputedValue, setInputedValue] = useState('');
+    const [activeItem, setActiveItem] = useState(1);
+    const [primaryColor, setPrimaryColor] = useState(allColors.lightBlue);
+    const [secondaryColor, setSecondaryColor] = useState(allColors.mediumBlue);
+
     const dispatch = useDispatch();
     const useSelector: TypedUseSelectorHook<RootState> = useReduxSelector;
 
     const Token = useSelector((state) => state.token);
+
+    const setColors = (
+        activeColor: number,
+        primaryColor: string,
+        secondaryColor: string
+    ) => {
+        setActiveItem(activeColor);
+        setPrimaryColor(primaryColor);
+        setSecondaryColor(secondaryColor);
+    };
 
     const toggleIsOpen = () => {
         setIsOpen(!isOpen);
@@ -96,7 +111,11 @@ const BoardFormModal = () => {
         const headers = { Authorization: `Bearer ${Token}` };
         Axios.post(
             'http://localhost:9000/BoardsAPI',
-            { title: inputedValue },
+            {
+                title: inputedValue,
+                primaryColor: primaryColor,
+                secondaryColor: secondaryColor,
+            },
             {
                 headers: headers,
             }
@@ -126,6 +145,12 @@ const BoardFormModal = () => {
                         onChange={setInputedText}
                         isForm
                     ></MainInput>
+                    <ColorsForm
+                        currentColor={activeItem}
+                        primaryColor={primaryColor}
+                        secondaryColor={secondaryColor}
+                        setColors={setColors}
+                    />
                     <StyledButton onClick={addBoardHandler}>
                         Add Board
                     </StyledButton>

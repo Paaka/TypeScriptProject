@@ -1,6 +1,6 @@
 export interface IList {
     ID: string;
-    [listTitle: string]: any;
+    listTitle: string | any;
     dashboardID: string;
 }
 

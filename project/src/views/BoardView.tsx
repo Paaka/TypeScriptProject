@@ -107,7 +107,14 @@ const BoardView = () => {
                 </BoardsList>
                 {lists.map((list) => {
                     if (list.dashboardID === dashID) {
-                        return <ListItem key={list.ID} list={list} />;
+                        return (
+                            <ListItem
+                                primary={thisBoard.primary}
+                                secondary={thisBoard.secondary}
+                                key={list.ID}
+                                list={list}
+                            />
+                        );
                     }
                 })}
                 <FormForList owner={dashID} token={Token} />

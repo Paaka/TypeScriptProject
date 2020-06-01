@@ -19,8 +19,21 @@ const Wrapper = styled.div`
     margin-top: 3px;
 `;
 
+const StyledUserPic = styled(UserPicture)`
+    height: 30px;
+    width: 30px;
+    background-image: 25px;
+`;
+
 const ParagraphWrapper = styled.div`
-    margin: 15px 0;
+    margin-top: 15px;
+`;
+
+const AdditionalInfoWrapper = styled.div`
+    display: flex;
+    width: 100%;
+    margin-top: 15px;
+    justify-content: flex-end;
 `;
 
 const SingleNote: FC<ISingleNote> = (props) => {
@@ -61,12 +74,14 @@ const SingleNote: FC<ISingleNote> = (props) => {
         >
             <ImportanceLabel priority={props.note.priority} />
             <ParagraphWrapper>
-                <StyledParagraph color={allColors.silverGray}>
+                <StyledParagraph fontSize={20} color={allColors.silverGray}>
                     {props.note.content}
                 </StyledParagraph>
-                <UserPicture
-                    logoPath={require('../../assets/SVGs/user.svg')}
-                ></UserPicture>
+                <AdditionalInfoWrapper>
+                    <StyledUserPic
+                        logoPath={require('../../assets/SVGs/user.svg')}
+                    ></StyledUserPic>
+                </AdditionalInfoWrapper>
             </ParagraphWrapper>
         </Wrapper>
     );

@@ -74,7 +74,7 @@ const MainRouter = () => {
     return (
         <Router>
             <Switch>
-                {isNull(Token)
+                {isTokenActive
                     ? unauthorizedComponents()
                     : AuthorizedCompontents()}
             </Switch>

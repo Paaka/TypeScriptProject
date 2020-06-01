@@ -17,14 +17,18 @@ import allColors from '../constants/allColors';
 
 interface IDashboardView {}
 
+const BgWrapper = styled.div`
+    width: 100%;
+    height: 90vh;
+    background-color: ${allColors.lightGray};
+`;
+
 const Wrapper = styled.div`
     margin-top: 2vh;
     margin-left: 1vw;
     display: grid;
     grid-template-columns: repeat(4, 22vw);
     position: absolute;
-
-    background-color: ${allColors.lightGray};
 `;
 
 const DashboardView: FC<IDashboardView> = () => {
@@ -47,14 +51,21 @@ const DashboardView: FC<IDashboardView> = () => {
 
     return (
         <MainTemplate>
-            <Wrapper>
-                {Dashboards.map((dashboard) => (
-                    <DashboardItem token={Token} id={dashboard.id}>
-                        {dashboard.title}
-                    </DashboardItem>
-                ))}
-                <DashboardFormModal></DashboardFormModal>
-            </Wrapper>
+            <BgWrapper>
+                <Wrapper>
+                    {Dashboards.map((dashboard) => (
+                        <DashboardItem
+                            primary={dashboard.primary}
+                            secondary={dashboard.secondary}
+                            token={Token}
+                            id={dashboard.id}
+                        >
+                            {dashboard.title}
+                        </DashboardItem>
+                    ))}
+                    <DashboardFormModal></DashboardFormModal>
+                </Wrapper>
+            </BgWrapper>
         </MainTemplate>
     );
 };

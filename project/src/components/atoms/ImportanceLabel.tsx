@@ -4,7 +4,7 @@ import allColors from '../../constants/allColors';
 
 interface IImportanceLabel {
     priority: number;
-    onClickFn?: (a: number) => void;
+    onClickFn?: (a: number, b: string) => void;
 }
 
 interface IColors {
@@ -25,6 +25,7 @@ const Wrapper = styled.div<IColors>`
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
     font-family: 'Montserrat', 'sans-serif';
 `;
 
@@ -64,7 +65,7 @@ const ImportanceLabel: FC<IImportanceLabel> = ({
     const values = readPriority();
 
     const clickHandler = () => {
-        onClickFn(priority);
+        onClickFn(priority, values.text);
     };
 
     return (

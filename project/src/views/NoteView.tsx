@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import {
     useDispatch,
@@ -16,8 +16,9 @@ import ButtonIcon from '../components/atoms/Buttons/ButtonIcon';
 import MainInput from '../components/atoms/MainInput';
 import { updateNoteTitle, deleteNote, changeNoteImportance } from '../actions';
 import Axios from 'axios';
-import { ETIME } from 'constants';
 import ImportanceLabel from '../components/atoms/ImportanceLabel';
+import StyledParagraph from '../components/atoms/Typography/StyledParagraph';
+import DivImage from '../components/atoms/DivImage';
 
 const BackgroundWrapper = styled.div`
     width: 100%;
@@ -34,6 +35,7 @@ const Wrapper = styled.div`
     background-color: white;
     position: relative;
     padding: 10px;
+    border-radius: 5px;
 `;
 
 const PositionWrapper = styled.div`
@@ -42,13 +44,34 @@ const PositionWrapper = styled.div`
     top: 10px;
 `;
 
+const StyledH2 = styled.h2`
+    margin: 10px 0;
+    font-family: 'Montserrat', 'sans-serif';
+    font-size: 22px;
+    margin-left: 10px;
+`;
+
+const FlexWrapper = styled.div`
+    display: flex;
+    width: 60%;
+    margin: 10px auto;
+    justify-content: space-between;
+`;
+
+const FlexW = styled.div`
+    display: flex;
+    align-items: center;
+`;
+
 const NotesView = () => {
     const history = useHistory();
     const location = useLocation();
     const dispatch = useDispatch();
+    const [label, setLabel] = useState('');
 
     const useSelector: TypedUseSelectorHook<RootState> = useReduxSelector;
     const Notes = useSelector((state) => state.notes);
+    const Lists = useSelector((state) => state.lists);
     const Token = useSelector((state) => state.token);
     const headers = { Authorization: `Bearer ${Token}` };
 
@@ -56,6 +79,7 @@ const NotesView = () => {
     const noteID = locationArray[3];
 
     const Note = Notes.find((note) => note.ID === noteID);
+    const list = Lists.find((list) => list.ID === Note?.ListID);
 
     const noteTitleHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         dispatch(updateNoteTitle(noteID, e.target.value));
@@ -75,7 +99,8 @@ const NotesView = () => {
         returnToLists();
     };
 
-    const changePriority = (priority: number) => {
+    const changePriority = (priority: number, text: string) => {
+        setLabel(text);
         dispatch(changeNoteImportance(noteID, priority));
         Axios.patch(
             'http://localhost:9000/notes',
@@ -100,15 +125,46 @@ const NotesView = () => {
                             iconPath={require('../assets/SVGs/cancel.svg')}
                         />
                     </PositionWrapper>
-                    <MainInput
-                        value={Note?.content || ''}
-                        onChange={noteTitleHandler}
-                    ></MainInput>
-                    <ImportanceLabel onClickFn={changePriority} priority={1} />
+                    <FlexW>
+                        <DivImage
+                            height={25}
+                            width={25}
+                            imagePath={require('../assets/SVGs/title.svg')}
+                        />
+                        <MainInput
+                            value={Note?.content || ''}
+                            onChange={noteTitleHandler}
+                        ></MainInput>
+                    </FlexW>
+                    <StyledParagraph fontSize={18} color={allColors.silverGray}>
+                        In list <u>{list?.listTitle}</u>
+                    </StyledParagraph>
+                    <FlexW>
+                        <DivImage
+                            height={25}
+                            width={25}
+                            imagePath={require('../assets/SVGs/move.svg')}
+                        />
 
-                    <ImportanceLabel onClickFn={changePriority} priority={2} />
-
-                    <ImportanceLabel onClickFn={changePriority} priority={3} />
+                        <StyledH2>Change priority :</StyledH2>
+                    </FlexW>
+                    <StyledParagraph>
+                        {label === '' ? ` ` : `You choose ${label}`}
+                    </StyledParagraph>
+                    <FlexWrapper>
+                        <ImportanceLabel
+                            onClickFn={changePriority}
+                            priority={1}
+                        />
+                        <ImportanceLabel
+                            onClickFn={changePriority}
+                            priority={2}
+                        />
+                        <ImportanceLabel
+                            onClickFn={changePriority}
+                            priority={3}
+                        />
+                    </FlexWrapper>
                     <button onClick={deleteNoteHandler}>Usuń notatke</button>
                 </Wrapper>
             </BackgroundWrapper>

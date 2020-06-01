@@ -24,6 +24,8 @@ import Axios from 'axios';
 
 interface IListItem {
     list: IList;
+    primary: string;
+    secondary: string;
 }
 interface IHeightWrapper {
     height: number;
@@ -31,6 +33,11 @@ interface IHeightWrapper {
 
 interface IWrapper {
     numberOfItems: number;
+}
+
+interface ITwoColors {
+    primary: string;
+    secondary: string;
 }
 
 const Wrapper = styled.div<IHeightWrapper>`
@@ -45,6 +52,9 @@ const Wrapper = styled.div<IHeightWrapper>`
     transition: height 0.2s;
     overflow: none;
     margin-top: 7vh;
+    position: relative;
+    /* border: 1px solid ${allColors.grey}; */
+    border-top: none;
 `;
 
 const SecondWrapper = styled.div<IWrapper>`
@@ -62,6 +72,23 @@ const InputWrapper = styled.div`
     width: 100%;
     justify-content: space-around;
     align-items: center;
+`;
+
+const TopHighlight = styled.div<ITwoColors>`
+    height: 4px;
+    width: 100%;
+    padding: 0px 10px;
+    background-image: linear-gradient(
+        to right,
+        ${(props) => props.primary},
+        ${(props) => props.secondary}
+    );
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    z-index: 50;
 `;
 
 const ListItem: FC<IListItem> = (props) => {
@@ -120,13 +147,15 @@ const ListItem: FC<IListItem> = (props) => {
     };
 
     const calculateHeight = () => {
-        const numOfItems = myNotes.length * 7;
+        const numOfItems = myNotes.length * 16;
         return 28 + numOfItems;
     };
 
     const dropHandler = (e: React.DragEvent<HTMLDivElement>) => {
         e.preventDefault();
+
         const card_id = e.dataTransfer.getData('card_id');
+        dispatch(dragNote(card_id, props.list.ID));
         Axios.patch(
             'http://localhost:9000/notes',
             {
@@ -153,6 +182,7 @@ const ListItem: FC<IListItem> = (props) => {
             onDragOver={dragOverHandler}
             height={calculateHeight()}
         >
+            <TopHighlight primary={props.primary} secondary={props.secondary} />
             <InputWrapper>
                 <MainInput
                     width={70}

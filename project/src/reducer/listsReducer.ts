@@ -110,7 +110,12 @@ const listsReducer = (state = initialState, action: any) => {
                 ...state,
                 dashboards: [
                     ...state.dashboards,
-                    new Board(action.payload.id, action.payload.title),
+                    new Board(
+                        action.payload.id,
+                        action.payload.title,
+                        action.payload.primary,
+                        action.payload.secondary
+                    ),
                 ],
             };
         }
