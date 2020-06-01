@@ -23,4 +23,5 @@ export default {
     lightGray: 'rgb(230,233,240)',
     listColor: 'rgb(239,242,245)',
     gradientGreen: 'rgb(129,213,237)',
+    silverGray: 'rgb(112,112,144)',
 };

@@ -71,15 +71,20 @@ const StyledBtn = styled.button`
 
 interface IUserInfo {
     user: any;
+    logOutFn: () => void;
 }
 
-const UserInfo: FC<IUserInfo> = ({ user }) => {
+const UserInfo: FC<IUserInfo> = ({ user, logOutFn }) => {
     const changeEmail = (newEmail: String) => {
         console.log(newEmail);
     };
 
     const changeUsername = (newName: String) => {
         console.log(newName);
+    };
+
+    const logOutHandler = () => {
+        logOutFn();
     };
 
     return (
@@ -98,7 +103,7 @@ const UserInfo: FC<IUserInfo> = ({ user }) => {
                     value={user.email}
                     onChangeHandler={changeEmail}
                 ></SettingsInput>
-                <StyledBtn onClick={() => {}}>Log out</StyledBtn>
+                <StyledBtn onClick={logOutHandler}>Log out</StyledBtn>
             </UserInfoWrapper>
         </Wrapper>
     );

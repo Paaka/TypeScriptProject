@@ -12,12 +12,7 @@ import Axios from 'axios';
 import styled from 'styled-components';
 import allColors from '../constants/allColors';
 import StyledH1 from '../components/atoms/Typography/StyledH1';
-import LoginParagrph from '../components/organisms/LoginForm/LoginParagraph';
-import StyledParagraph from '../components/atoms/Typography/StyledParagraph';
-import Button from '../components/atoms/Buttons/Button';
-import SettingsInput from '../components/atoms/SettingsInput';
 import UserInfo from '../components/molecules/UserInfo';
-import { IUser } from '../models/User';
 
 interface ISettingsView {}
 
@@ -94,7 +89,7 @@ const SettingsView: FC<ISettingsView> = () => {
     return (
         <MainTemplate>
             <Wrapper>
-                <UserInfo user={User}></UserInfo>
+                <UserInfo logOutFn={logOutHandler} user={User}></UserInfo>
                 <PasswordContainer>
                     <StyledH1 color="white">Change your password :</StyledH1>
                     <StyledInput placeholder="Current Password"></StyledInput>

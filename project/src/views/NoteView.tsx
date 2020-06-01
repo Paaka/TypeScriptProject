@@ -77,6 +77,13 @@ const NotesView = () => {
 
     const changePriority = (priority: number) => {
         dispatch(changeNoteImportance(noteID, priority));
+        Axios.patch(
+            'http://localhost:9000/notes',
+            { cardID: noteID, priority },
+            { headers }
+        )
+            .then((res) => console.log(res))
+            .catch((err) => console.log(err));
     };
 
     const returnToLists = () => history.goBack();

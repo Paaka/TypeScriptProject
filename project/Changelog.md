@@ -6,6 +6,14 @@
 -   Updating notes importance,
 -   Components: ImportanceLabel.
 
+**Fixed**
+
+-   Sign out bug.
+
+**Changes**
+
+-   Changed router code.
+
 ## V.0.3 May 31,2020
 
 **Added**

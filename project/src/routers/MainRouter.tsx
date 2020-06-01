@@ -27,72 +27,56 @@ const MainRouter = () => {
     const useSelector: TypedUseSelectorHook<RootState> = useReduxSelector;
 
     const Token = useSelector((state) => state.token);
+    const isTokenActive = isNull(Token);
 
+    const unauthorizedComponents = () => (
+        <>
+            <Route path="/Login">
+                <LoginView></LoginView>
+            </Route>
+            <Route path="/SignIn">
+                <SignInView></SignInView>
+            </Route>
+            <Redirect from="/" exact to="/Login"></Redirect>
+            <Redirect from="/Dashboards" exact to="/Login"></Redirect>
+            <Redirect from="/Boards" to="/Login"></Redirect>
+            <Redirect from="/Settings" exact to="/Login"></Redirect>
+            <Redirect from="/Raports" exact to="/Login"></Redirect>
+            <Redirect from="/Schedule" exact to="/Login"></Redirect>
+        </>
+    );
+    const AuthorizedCompontents = () => (
+        <>
+            <Redirect from="/" exact to="/Dashboards"></Redirect>
+            <Redirect from="/Login" exact to="/Dashboards"></Redirect>
+            <Redirect from="/SignIn" exact to="/Dashboards"></Redirect>
+
+            <Route path="/Dashboards">
+                <DashboardView></DashboardView>
+            </Route>
+            <Route path="/Boards/:id" exact>
+                <BoardView></BoardView>
+            </Route>
+            <Route path="/Boards/:id/:noteId">
+                <NoteView></NoteView>
+            </Route>
+            <Route path="/Settings">
+                <SettingsView></SettingsView>
+            </Route>
+            <Route path="/Raports">
+                <RaportsView></RaportsView>
+            </Route>
+            <Route path="/Schedule">
+                <ScheduleView></ScheduleView>
+            </Route>
+        </>
+    );
     return (
         <Router>
             <Switch>
-                {isNull(Token) ? (
-                    <Redirect from="/" exact to="/Login"></Redirect>
-                ) : (
-                    <Redirect from="/" exact to="/Dashboards"></Redirect>
-                )}
-                {!isNull(Token) ? (
-                    <Route path="/Dashboards">
-                        <DashboardView></DashboardView>
-                    </Route>
-                ) : (
-                    <Redirect from="/Dashboards" exact to="/Login"></Redirect>
-                )}
-                {!isNull(Token) ? (
-                    <Route path="/Boards/:id" exact>
-                        <BoardView></BoardView>
-                    </Route>
-                ) : (
-                    <Redirect from="/Boards" to="/Login"></Redirect>
-                )}
-                {!isNull(Token) ? (
-                    <Route path="/Boards/:id/:noteId">
-                        <NoteView></NoteView>
-                    </Route>
-                ) : (
-                    <Redirect from="/Boards" to="/Login"></Redirect>
-                )}
-                {!isNull(Token) ? (
-                    <Route path="/Settings">
-                        <SettingsView></SettingsView>
-                    </Route>
-                ) : (
-                    <Redirect from="/Settings" exact to="/Login"></Redirect>
-                )}
-                {!isNull(Token) ? (
-                    <Route path="/Raports">
-                        <RaportsView></RaportsView>
-                    </Route>
-                ) : (
-                    <Redirect from="/Raports" exact to="/Login"></Redirect>
-                )}
-                {!isNull(Token) ? (
-                    <Route path="/Schedule">
-                        <ScheduleView></ScheduleView>
-                    </Route>
-                ) : (
-                    <Redirect from="/Schedule" exact to="/Login"></Redirect>
-                )}
-
-                {isNull(Token) ? (
-                    <Route path="/Login">
-                        <LoginView></LoginView>
-                    </Route>
-                ) : (
-                    <Redirect from="/Login" exact to="/Dashboards"></Redirect>
-                )}
-                {isNull(Token) ? (
-                    <Route path="/SignIn">
-                        <SignInView></SignInView>
-                    </Route>
-                ) : (
-                    <Redirect from="/SignIn" exact to="/Dashboards"></Redirect>
-                )}
+                {isNull(Token)
+                    ? unauthorizedComponents()
+                    : AuthorizedCompontents()}
             </Switch>
         </Router>
     );

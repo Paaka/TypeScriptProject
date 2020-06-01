@@ -3,28 +3,30 @@ import styled from 'styled-components';
 import { INote } from '../../models/Note';
 import StyledParagraph from '../atoms/Typography/StyledParagraph';
 import { useHistory, useLocation } from 'react-router-dom';
+import allColors from '../../constants/allColors';
 import ImportanceLabel from '../atoms/ImportanceLabel';
-
-const Wrapper = styled.div`
-    width: 80%;
-    padding: 10px 5px;
-    background-color: white;
-    text-align: center;
-    border-radius: 8px;
-    margin-top: 3px;
-`;
+import UserPicture from '../atoms/UserPicture';
 
 interface ISingleNote {
     note: INote;
 }
 
-interface selectProtected {
-    card: HTMLDivElement;
-}
+const Wrapper = styled.div`
+    width: 80%;
+    padding: 10px 5px;
+    background-color: white;
+    border-radius: 8px;
+    margin-top: 3px;
+`;
+
+const ParagraphWrapper = styled.div`
+    margin: 15px 0;
+`;
 
 const SingleNote: FC<ISingleNote> = (props) => {
     const History = useHistory();
     const location = useLocation();
+
     const dragOverHandler = (e: React.DragEvent<HTMLDivElement>) => {
         e.stopPropagation();
     };
@@ -58,7 +60,14 @@ const SingleNote: FC<ISingleNote> = (props) => {
             onDragEnd={dropHandler}
         >
             <ImportanceLabel priority={props.note.priority} />
-            <StyledParagraph>{props.note.content}</StyledParagraph>
+            <ParagraphWrapper>
+                <StyledParagraph color={allColors.silverGray}>
+                    {props.note.content}
+                </StyledParagraph>
+                <UserPicture
+                    logoPath={require('../../assets/SVGs/user.svg')}
+                ></UserPicture>
+            </ParagraphWrapper>
         </Wrapper>
     );
 };
