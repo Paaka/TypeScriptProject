@@ -152,6 +152,14 @@ const listsReducer = (state = initialState, action: any) => {
                 }),
             };
         }
+        case types.DELETE_NOTE: {
+            return {
+                ...state,
+                notes: state.notes.filter(
+                    (note) => note.ID !== action.payload.noteID
+                ),
+            };
+        }
         default:
             return state;
     }

@@ -1,3 +1,10 @@
+## V.0.3.1 June 1,2020
+
+**Added**
+
+-   Deleting notes,
+-   Components: ImportanceLabel.
+
 ## V.0.3 May 31,2020
 
 **Added**

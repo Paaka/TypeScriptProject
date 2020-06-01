@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { INote } from '../../models/Note';
 import StyledParagraph from '../atoms/Typography/StyledParagraph';
 import { useHistory, useLocation } from 'react-router-dom';
+import ImportanceLabel from '../atoms/ImportanceLabel';
 
 const Wrapper = styled.div`
     width: 80%;
@@ -56,6 +57,7 @@ const SingleNote: FC<ISingleNote> = (props) => {
             onDragOver={dragOverHandler}
             onDragEnd={dropHandler}
         >
+            <ImportanceLabel priority={3} />
             <StyledParagraph>{props.note.content}</StyledParagraph>
         </Wrapper>
     );

@@ -22,4 +22,5 @@ export default {
     orangeDark: '#ec8a00',
     lightGray: 'rgb(230,233,240)',
     listColor: 'rgb(239,242,245)',
+    gradientGreen: 'rgb(129,213,237)',
 };

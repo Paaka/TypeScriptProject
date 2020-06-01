@@ -12,6 +12,8 @@ export const DELETE_LIST = 'DELETE_LIST';
 
 export const DELETE_BOARD = 'DELETE_BOARD';
 
+export const DELETE_NOTE = 'DELETE_NOTE';
+
 export const ADD_NOTE = 'ADD_NOTE';
 
 export const DRAG_NOTE = 'DRAG_NOTE';

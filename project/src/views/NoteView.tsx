@@ -14,7 +14,9 @@ import allColors from '../constants/allColors';
 import { useHistory, useLocation } from 'react-router-dom';
 import ButtonIcon from '../components/atoms/Buttons/ButtonIcon';
 import MainInput from '../components/atoms/MainInput';
-import { updateNoteTitle } from '../actions';
+import { updateNoteTitle, deleteNote } from '../actions';
+import Axios from 'axios';
+import { ETIME } from 'constants';
 
 const BackgroundWrapper = styled.div`
     width: 100%;
@@ -46,6 +48,8 @@ const NotesView = () => {
 
     const useSelector: TypedUseSelectorHook<RootState> = useReduxSelector;
     const Notes = useSelector((state) => state.notes);
+    const Token = useSelector((state) => state.token);
+    const headers = { Authorization: `Bearer ${Token}` };
 
     const locationArray = location.pathname.split('/');
     const noteID = locationArray[3];
@@ -54,6 +58,20 @@ const NotesView = () => {
 
     const noteTitleHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         dispatch(updateNoteTitle(noteID, e.target.value));
+        Axios.patch(
+            'http://localhost:9000/notes',
+            { cardID: noteID, title: e.target.value },
+            { headers }
+        )
+            .then((res) => console.log())
+            .catch((err) => console.log());
+    };
+
+    const deleteNoteHandler = () => {
+        Axios.delete(`http://localhost:9000/notes/${noteID}`, { headers })
+            .then((res) => dispatch(deleteNote(noteID)))
+            .catch((err) => console.log(err));
+        returnToLists();
     };
 
     const returnToLists = () => history.goBack();
@@ -74,6 +92,7 @@ const NotesView = () => {
                         value={Note?.content || ''}
                         onChange={noteTitleHandler}
                     ></MainInput>
+                    <button onClick={deleteNoteHandler}>Usuń notatke</button>
                 </Wrapper>
             </BackgroundWrapper>
         </MainTemplate>
