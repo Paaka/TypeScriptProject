@@ -57,7 +57,7 @@ const SingleNote: FC<ISingleNote> = (props) => {
             onDragOver={dragOverHandler}
             onDragEnd={dropHandler}
         >
-            <ImportanceLabel priority={3} />
+            <ImportanceLabel priority={props.note.priority} />
             <StyledParagraph>{props.note.content}</StyledParagraph>
         </Wrapper>
     );

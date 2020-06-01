@@ -68,7 +68,8 @@ const listsReducer = (state = initialState, action: any) => {
                     new Note(
                         action.payload.id,
                         action.payload.listID,
-                        action.payload.content
+                        action.payload.content,
+                        action.payload.priority
                     ),
                 ],
             };
@@ -82,7 +83,6 @@ const listsReducer = (state = initialState, action: any) => {
             };
         }
         case types.DRAG_NOTE: {
-            console.log(action.payload);
             return {
                 ...state,
                 notes: state.notes.map((note) => {
@@ -158,6 +158,22 @@ const listsReducer = (state = initialState, action: any) => {
                 notes: state.notes.filter(
                     (note) => note.ID !== action.payload.noteID
                 ),
+            };
+        }
+        case types.CHANGE_NOTE_IMPORTANCE: {
+            return {
+                ...state,
+                notes: state.notes.map((note) => {
+                    const priority: number = action.payload.priority;
+                    if (note.ID === action.payload.noteID) {
+                        return {
+                            ...note,
+                            priority,
+                        };
+                    } else {
+                        return note;
+                    }
+                }),
             };
         }
         default:

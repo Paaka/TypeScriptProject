@@ -14,9 +14,10 @@ import allColors from '../constants/allColors';
 import { useHistory, useLocation } from 'react-router-dom';
 import ButtonIcon from '../components/atoms/Buttons/ButtonIcon';
 import MainInput from '../components/atoms/MainInput';
-import { updateNoteTitle, deleteNote } from '../actions';
+import { updateNoteTitle, deleteNote, changeNoteImportance } from '../actions';
 import Axios from 'axios';
 import { ETIME } from 'constants';
+import ImportanceLabel from '../components/atoms/ImportanceLabel';
 
 const BackgroundWrapper = styled.div`
     width: 100%;
@@ -74,6 +75,10 @@ const NotesView = () => {
         returnToLists();
     };
 
+    const changePriority = (priority: number) => {
+        dispatch(changeNoteImportance(noteID, priority));
+    };
+
     const returnToLists = () => history.goBack();
 
     return (
@@ -92,6 +97,11 @@ const NotesView = () => {
                         value={Note?.content || ''}
                         onChange={noteTitleHandler}
                     ></MainInput>
+                    <ImportanceLabel onClickFn={changePriority} priority={1} />
+
+                    <ImportanceLabel onClickFn={changePriority} priority={2} />
+
+                    <ImportanceLabel onClickFn={changePriority} priority={3} />
                     <button onClick={deleteNoteHandler}>Usuń notatke</button>
                 </Wrapper>
             </BackgroundWrapper>

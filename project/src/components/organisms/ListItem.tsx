@@ -86,7 +86,12 @@ const ListItem: FC<IListItem> = (props) => {
         )
             .then((res) =>
                 dispatch(
-                    addNote(res.data._id, res.data.listID, res.data.content)
+                    addNote(
+                        res.data._id,
+                        res.data.listID,
+                        res.data.content,
+                        res.data.priority
+                    )
                 )
             )
             .catch((e) => console.log(e));

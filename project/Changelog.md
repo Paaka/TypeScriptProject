@@ -3,6 +3,7 @@
 **Added**
 
 -   Deleting notes,
+-   Updating notes importance,
 -   Components: ImportanceLabel.
 
 ## V.0.3 May 31,2020
