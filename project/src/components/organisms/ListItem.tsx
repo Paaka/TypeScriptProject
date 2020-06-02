@@ -53,7 +53,6 @@ const Wrapper = styled.div<IHeightWrapper>`
     overflow: none;
     margin-top: 7vh;
     position: relative;
-    /* border: 1px solid ${allColors.grey}; */
     border-top: none;
 `;
 
@@ -117,7 +116,8 @@ const ListItem: FC<IListItem> = (props) => {
                         res.data._id,
                         res.data.listID,
                         res.data.content,
-                        res.data.priority
+                        res.data.priority,
+                        res.data.description
                     )
                 )
             )

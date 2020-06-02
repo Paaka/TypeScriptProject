@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     useDispatch,
     useSelector as useReduxSelector,
@@ -15,6 +15,7 @@ import BoardsList from '../components/molecules/BoardsList';
 import BoardFormModal from '../components/organisms/BoardFormModal';
 import Axios from 'axios';
 import { addList, addNote, updateBoardTitle } from '../actions';
+import Spinner from '../components/atoms/Spinner/Spinner';
 
 interface IWrapper {
     width: number;
@@ -35,6 +36,7 @@ const BoardView = () => {
     const Token = useSelector((state) => state.token);
     const allNotes = useSelector((state) => state.notes);
     const board = useSelector((state) => state.dashboards);
+    const [isLoading, setIsLoading] = useState(true);
 
     const headers = { Authorization: `Bearer ${Token}` };
 
@@ -67,11 +69,13 @@ const BoardView = () => {
                                 note._id,
                                 note.listID,
                                 note.content,
-                                note.priority
+                                note.priority,
+                                note.description
                             )
                         )
                     );
                 }
+                setIsLoading(false);
             })
             .catch((err) => console.log(err));
     }, [Token, dispatch]);
@@ -101,25 +105,29 @@ const BoardView = () => {
 
     return (
         <MainTemplate>
-            <ColumnWrapper width={calculateWidth()}>
-                <BoardsList updateTitleHandler={updateTitle}>
-                    {thisBoard.title}
-                </BoardsList>
-                {lists.map((list) => {
-                    if (list.dashboardID === dashID) {
-                        return (
-                            <ListItem
-                                primary={thisBoard.primary}
-                                secondary={thisBoard.secondary}
-                                key={list.ID}
-                                list={list}
-                            />
-                        );
-                    }
-                })}
-                <FormForList owner={dashID} token={Token} />
-                <BoardFormModal />
-            </ColumnWrapper>
+            {isLoading ? (
+                <Spinner />
+            ) : (
+                <ColumnWrapper width={calculateWidth()}>
+                    <BoardsList updateTitleHandler={updateTitle}>
+                        {thisBoard.title}
+                    </BoardsList>
+                    {lists.map((list) => {
+                        if (list.dashboardID === dashID) {
+                            return (
+                                <ListItem
+                                    primary={thisBoard.primary}
+                                    secondary={thisBoard.secondary}
+                                    key={list.ID}
+                                    list={list}
+                                />
+                            );
+                        }
+                    })}
+                    <FormForList owner={dashID} token={Token} />
+                    <BoardFormModal />
+                </ColumnWrapper>
+            )}
         </MainTemplate>
     );
 };

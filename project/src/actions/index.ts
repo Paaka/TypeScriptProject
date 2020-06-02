@@ -25,7 +25,8 @@ export const addNote = (
     id: string,
     listID: string,
     content: string,
-    priority: number
+    priority: number,
+    description: string
 ) => {
     return {
         type: types.ADD_NOTE,
@@ -34,6 +35,7 @@ export const addNote = (
             listID,
             content,
             priority,
+            description,
         },
     };
 };
@@ -81,6 +83,16 @@ export const updateBoardTitle = (boardID: string, newTitle: string) => {
         payload: {
             boardID,
             newTitle,
+        },
+    };
+};
+
+export const updateNoteDescription = (noteID: string, description: string) => {
+    return {
+        type: types.UPDATE_NOTE_DESCRIPTION,
+        payload: {
+            noteID,
+            description,
         },
     };
 };

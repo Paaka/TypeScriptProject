@@ -14,11 +14,17 @@ import allColors from '../constants/allColors';
 import { useHistory, useLocation } from 'react-router-dom';
 import ButtonIcon from '../components/atoms/Buttons/ButtonIcon';
 import MainInput from '../components/atoms/MainInput';
-import { updateNoteTitle, deleteNote, changeNoteImportance } from '../actions';
+import {
+    updateNoteTitle,
+    deleteNote,
+    changeNoteImportance,
+    updateNoteDescription,
+} from '../actions';
 import Axios from 'axios';
 import ImportanceLabel from '../components/atoms/ImportanceLabel';
 import StyledParagraph from '../components/atoms/Typography/StyledParagraph';
 import DivImage from '../components/atoms/DivImage';
+import Description from '../components/molecules/Description';
 
 const BackgroundWrapper = styled.div`
     width: 100%;
@@ -111,6 +117,17 @@ const NotesView = () => {
             .catch((err) => console.log(err));
     };
 
+    const saveDescription = (value: string) => {
+        dispatch(updateNoteDescription(noteID, value));
+        Axios.patch(
+            'http://localhost:9000/notes',
+            { cardID: noteID, description: value },
+            { headers }
+        )
+            .then((res) => console.log(res))
+            .catch((err) => console.log(err));
+    };
+
     const returnToLists = () => history.goBack();
 
     return (
@@ -165,6 +182,19 @@ const NotesView = () => {
                             priority={3}
                         />
                     </FlexWrapper>
+                    <FlexW>
+                        <DivImage
+                            height={25}
+                            width={25}
+                            imagePath={require('../assets/SVGs/product.svg')}
+                        />
+
+                        <StyledH2>Description :</StyledH2>
+                    </FlexW>
+                    <Description
+                        initialValue={Note?.description || ''}
+                        onClickFn={saveDescription}
+                    />
                     <button onClick={deleteNoteHandler}>Usuń notatke</button>
                 </Wrapper>
             </BackgroundWrapper>

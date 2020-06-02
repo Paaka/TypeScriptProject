@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import {
     useDispatch,
     useSelector as useReduxSelector,
@@ -14,6 +14,7 @@ import MainTemplate from '../templates/MainTemplate';
 import DashboardItem from '../components/molecules/SingleItems/DashboardItem';
 import DashboardFormModal from '../components/organisms/BoardFormModal';
 import allColors from '../constants/allColors';
+import Spinner from '../components/atoms/Spinner/Spinner';
 
 interface IDashboardView {}
 
@@ -33,6 +34,7 @@ const Wrapper = styled.div`
 
 const DashboardView: FC<IDashboardView> = () => {
     const dispatch = useDispatch();
+    const [isLoading, setIsLoading] = useState(true);
     const useSelector: TypedUseSelectorHook<RootState> = useReduxSelector;
     const Dashboards = useSelector((state) => state.dashboards);
     const Token = useSelector((state) => state.token);
@@ -45,6 +47,7 @@ const DashboardView: FC<IDashboardView> = () => {
                 if (Dashboards.length !== arr.length) {
                     arr.forEach((board) => dispatch(addBoard(board)));
                 }
+                setIsLoading(false);
             })
             .catch((err) => console.log(err));
     }, [Token]);
@@ -52,19 +55,23 @@ const DashboardView: FC<IDashboardView> = () => {
     return (
         <MainTemplate>
             <BgWrapper>
-                <Wrapper>
-                    {Dashboards.map((dashboard) => (
-                        <DashboardItem
-                            primary={dashboard.primary}
-                            secondary={dashboard.secondary}
-                            token={Token}
-                            id={dashboard.id}
-                        >
-                            {dashboard.title}
-                        </DashboardItem>
-                    ))}
-                    <DashboardFormModal></DashboardFormModal>
-                </Wrapper>
+                {isLoading ? (
+                    <Spinner />
+                ) : (
+                    <Wrapper>
+                        {Dashboards.map((dashboard) => (
+                            <DashboardItem
+                                primary={dashboard.primary}
+                                secondary={dashboard.secondary}
+                                token={Token}
+                                id={dashboard.id}
+                            >
+                                {dashboard.title}
+                            </DashboardItem>
+                        ))}
+                        <DashboardFormModal></DashboardFormModal>
+                    </Wrapper>
+                )}
             </BgWrapper>
         </MainTemplate>
     );

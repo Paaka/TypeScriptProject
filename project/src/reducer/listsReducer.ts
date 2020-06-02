@@ -69,7 +69,8 @@ const listsReducer = (state = initialState, action: any) => {
                         action.payload.id,
                         action.payload.listID,
                         action.payload.content,
-                        action.payload.priority
+                        action.payload.priority,
+                        action.payload.description
                     ),
                 ],
             };
@@ -150,6 +151,23 @@ const listsReducer = (state = initialState, action: any) => {
                         return {
                             ...note,
                             content: newcontent,
+                        };
+                    } else {
+                        return note;
+                    }
+                }),
+            };
+        }
+        case types.UPDATE_NOTE_DESCRIPTION: {
+            return {
+                ...state,
+                notes: state.notes.map((note) => {
+                    if (note.ID === action.payload.noteID) {
+                        const description: string = action.payload.description;
+
+                        return {
+                            ...note,
+                            description: description,
                         };
                     } else {
                         return note;
