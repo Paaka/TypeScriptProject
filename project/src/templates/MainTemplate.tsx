@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import Sidebar from '../components/organisms/Sidebar';
-import allColors from '../constants/allColors';
 import VerticalSidebar from '../components/organisms/Sidebars/VerticalSidebar';
 
 interface IMainTemplate {

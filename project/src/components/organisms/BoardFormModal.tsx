@@ -14,6 +14,7 @@ import Button from '../atoms/Buttons/Button';
 import MainInput from '../atoms/MainInput';
 import Axios from 'axios';
 import ColorsForm from '../molecules/ColorsForm';
+import { backendURL } from '../../constants/url';
 
 interface IActive {
     isActive: boolean;
@@ -110,7 +111,7 @@ const BoardFormModal = () => {
     const addBoardHandler = () => {
         const headers = { Authorization: `Bearer ${Token}` };
         Axios.post(
-            'http://localhost:9000/BoardsAPI',
+            `${backendURL}/BoardsAPI`,
             {
                 title: inputedValue,
                 primaryColor: primaryColor,

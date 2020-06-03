@@ -15,6 +15,7 @@ import DashboardItem from '../components/molecules/SingleItems/DashboardItem';
 import DashboardFormModal from '../components/organisms/BoardFormModal';
 import allColors from '../constants/allColors';
 import Spinner from '../components/atoms/Spinner/Spinner';
+import { backendURL } from '../constants/url';
 
 interface IDashboardView {}
 
@@ -41,7 +42,7 @@ const DashboardView: FC<IDashboardView> = () => {
 
     useEffect(() => {
         const headers = { Authorization: `Bearer ${Token}` };
-        Axios.get('http://localhost:9000/Dashboards', { headers })
+        Axios.get(`${backendURL}/Dashboards`, { headers })
             .then((res) => {
                 const arr: Array<Object> = res.data;
                 if (Dashboards.length !== arr.length) {
@@ -61,6 +62,7 @@ const DashboardView: FC<IDashboardView> = () => {
                     <Wrapper>
                         {Dashboards.map((dashboard) => (
                             <DashboardItem
+                                key={dashboard.id}
                                 primary={dashboard.primary}
                                 secondary={dashboard.secondary}
                                 token={Token}

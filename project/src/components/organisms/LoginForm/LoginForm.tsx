@@ -7,6 +7,7 @@ import allColors from '../../../constants/allColors';
 import LoginInput from './LoginInput';
 import LoginParagrph from './LoginParagraph';
 import Axios from 'axios';
+import { backendURL } from '../../../constants/url';
 
 const LoginWrapper = styled.div`
     height: 70vh;
@@ -71,19 +72,16 @@ const LoginForm = () => {
     const onSubmitHandler = (e: React.FormEvent) => {
         e.preventDefault();
 
-        Axios.post('http://localhost:9000/users/login', {
+        Axios.post(`${backendURL}/users/login`, {
             email,
             password,
         })
             .then((res) => {
-                const response = res.data;
-                console.log(response);
                 if (res.data.token) {
                     dispatch(logInUser(res.data.user, res.data.token));
                 }
             })
             .catch((err) => console.log(err));
-        console.log(email + password);
     };
 
     return (
@@ -92,6 +90,7 @@ const LoginForm = () => {
                 <StyledH1 size={28} color={allColors.lightBlue}>
                     {'Welcome'}
                 </StyledH1>
+
                 <StyledParagraph>Please Login to continue</StyledParagraph>
             </div>
             <BottomWrapper>
@@ -109,7 +108,7 @@ const LoginForm = () => {
                         type="password"
                         color="royalblue"
                         labelText="Password"
-                        id="emailInput"
+                        id="passwordInput"
                         placeholderText="Type your password..."
                         iconPath={require('../../../assets/SVGs/closed.svg')}
                     />

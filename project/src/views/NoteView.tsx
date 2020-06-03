@@ -25,6 +25,7 @@ import ImportanceLabel from '../components/atoms/ImportanceLabel';
 import StyledParagraph from '../components/atoms/Typography/StyledParagraph';
 import DivImage from '../components/atoms/DivImage';
 import Description from '../components/molecules/Description';
+import { backendURL } from '../constants/url';
 
 const BackgroundWrapper = styled.div`
     width: 100%;
@@ -90,7 +91,7 @@ const NotesView = () => {
     const noteTitleHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         dispatch(updateNoteTitle(noteID, e.target.value));
         Axios.patch(
-            'http://localhost:9000/notes',
+            `${backendURL}/notes`,
             { cardID: noteID, title: e.target.value },
             { headers }
         )
@@ -99,7 +100,7 @@ const NotesView = () => {
     };
 
     const deleteNoteHandler = () => {
-        Axios.delete(`http://localhost:9000/notes/${noteID}`, { headers })
+        Axios.delete(`${backendURL}/notes/${noteID}`, { headers })
             .then((res) => dispatch(deleteNote(noteID)))
             .catch((err) => console.log(err));
         returnToLists();
@@ -109,7 +110,7 @@ const NotesView = () => {
         setLabel(text);
         dispatch(changeNoteImportance(noteID, priority));
         Axios.patch(
-            'http://localhost:9000/notes',
+            `${backendURL}/notes`,
             { cardID: noteID, priority },
             { headers }
         )
@@ -120,7 +121,7 @@ const NotesView = () => {
     const saveDescription = (value: string) => {
         dispatch(updateNoteDescription(noteID, value));
         Axios.patch(
-            'http://localhost:9000/notes',
+            `${backendURL}/notes`,
             { cardID: noteID, description: value },
             { headers }
         )

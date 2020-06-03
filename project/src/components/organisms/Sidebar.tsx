@@ -113,7 +113,10 @@ const Sidebar: FC<ISidebar> = (props) => {
         <Wrapper color={colors.primary}>
             <LeftWrapper>
                 <DarkerWrapper color={colors.secondary}>
-                    <NavLink to="/" style={{ textDecoration: 'none' }}>
+                    <NavLink
+                        to="/Dashboards"
+                        style={{ textDecoration: 'none' }}
+                    >
                         <StyledParagraph fontSize={18} color="white">
                             kanban
                         </StyledParagraph>

@@ -118,7 +118,6 @@ export const updateNoteTitle = (noteID: string, newTitle: string) => {
 };
 
 export const addBoard = (board: any) => {
-    console.log(board);
     return {
         type: types.ADD_BOARD,
         payload: {

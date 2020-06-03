@@ -10,6 +10,7 @@ import MainInput from '../atoms/MainInput';
 import ButtonIcon from '../atoms/Buttons/ButtonIcon';
 import DivImage from '../atoms/DivImage';
 import Axios from 'axios';
+import { backendURL } from '../../constants/url';
 
 const Column = styled.div`
     height: 90vh;
@@ -98,7 +99,7 @@ const FormForList: FC<IFormForList> = (props) => {
     const addListHandler = () => {
         const headers = { Authorization: `Bearer ${props.token}` };
         Axios.post(
-            'http://localhost:9000/lists',
+            `${backendURL}/lists`,
             { listTitle: inputedText, listOwner: props.owner },
             { headers }
         )

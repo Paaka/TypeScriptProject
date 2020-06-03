@@ -1,6 +1,5 @@
 import React, { FC, useState } from 'react';
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
 
 import Button from '../atoms/Buttons/Button';
 import allColors from '../../constants/allColors';
@@ -8,7 +7,6 @@ import Sizes from '../../constants/Sizes';
 import MainInput from '../atoms/MainInput';
 import ButtonIcon from '../atoms/Buttons/ButtonIcon';
 import DivImage from '../atoms/DivImage';
-import Axios from 'axios';
 
 const Column = styled.div`
     height: 90vh;
@@ -77,7 +75,6 @@ const InputWrapper = styled.div`
 `;
 
 const ItemForm: FC<IItemForm> = (props) => {
-    const dispatch = useDispatch();
     const [isOpen, setIsOpen] = useState(false);
     const [inputedText, setInputedText] = useState('');
 

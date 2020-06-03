@@ -1,8 +1,5 @@
 import React, { FC, useState } from 'react';
 import styled from 'styled-components';
-import StyledH1 from '../atoms/Typography/StyledH1';
-import allColors from '../../constants/allColors';
-import DivImage from '../atoms/DivImage';
 
 interface IBoardsList {
     children: string;

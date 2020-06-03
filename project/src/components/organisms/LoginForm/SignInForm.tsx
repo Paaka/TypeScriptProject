@@ -7,6 +7,7 @@ import allColors from '../../../constants/allColors';
 import LoginInput from './LoginInput';
 import LoginParagrph from './LoginParagraph';
 import { logInUser } from '../../../actions';
+import { backendURL } from '../../../constants/url';
 
 const Wrapper = styled.div`
     height: 70vh;
@@ -65,10 +66,9 @@ const SignInForm = () => {
     const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        console.log(email, password, password2);
         if (password === password2) {
             axios
-                .post('http://localhost:9000/users', {
+                .post(`${backendURL}/users`, {
                     email,
                     password,
                 })

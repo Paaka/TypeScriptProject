@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import allColors from '../../../constants/allColors';
 import DivImage from '../../atoms/DivImage';

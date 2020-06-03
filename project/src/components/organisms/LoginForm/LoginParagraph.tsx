@@ -14,7 +14,7 @@ interface IStyledP {
     color?: string;
 }
 
-const StyledP = styled.p<IStyledP>`
+const StyledP = styled.div<IStyledP>`
     text-align: center;
     font-weight: 400;
     padding: 0;

@@ -2,9 +2,8 @@ import * as types from '../actions/types';
 import List, { IList } from '../models/List';
 import Note, { INote } from '../models/Note';
 import { IToken } from '../models/Token';
-import Board, { IBoard } from '../models/Board';
+import Board from '../models/Board';
 import User, { IUser } from '../models/User';
-import { stringify } from 'querystring';
 
 const initialState: IMainState = {
     lists: [],
@@ -88,7 +87,6 @@ const listsReducer = (state = initialState, action: any) => {
                 ...state,
                 notes: state.notes.map((note) => {
                     if (note.ID === action.payload.noteID) {
-                        console.log('work');
                         return {
                             ...note,
                             ListID: action.payload.listID,

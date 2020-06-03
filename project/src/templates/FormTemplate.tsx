@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import allColors from '../constants/allColors';
 
 const Wrapper = styled.div<IFormTemplate>`
     width: 100vw;

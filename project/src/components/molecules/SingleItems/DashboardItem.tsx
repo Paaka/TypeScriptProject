@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 import { IToken } from '../../../models/Token';
 import { deleteBoard } from '../../../actions/index';
 import styled from 'styled-components';
-import allColors from '../../../constants/allColors';
 import ButtonIcon from '../../atoms/Buttons/ButtonIcon';
 import Axios from 'axios';
+import { backendURL } from '../../../constants/url';
 
 interface IDashboardItem {
     children: string;
@@ -55,7 +55,7 @@ const DashboardItem: FC<IDashboardItem> = (props) => {
     const dispatch = useDispatch();
     const deleteDashboardHandler = () => {
         const headers = { Authorization: `Bearer ${props.token}` };
-        Axios.delete(`http://localhost:9000/Dashboards/${props.id}`, {
+        Axios.delete(`${backendURL}/Dashboards/${props.id}`, {
             headers,
         })
             .then((result) => dispatch(deleteBoard(result.data._id)))

@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC } from 'react';
 import {
     useDispatch,
     useSelector as useReduxSelector,
@@ -21,6 +21,7 @@ import ItemForm from '../molecules/ItemForm';
 import SingleNote from '../molecules/SingleNote';
 import ButtonIcon from '../atoms/Buttons/ButtonIcon';
 import Axios from 'axios';
+import { backendURL } from '../../constants/url';
 
 interface IListItem {
     list: IList;
@@ -103,7 +104,7 @@ const ListItem: FC<IListItem> = (props) => {
     const addNoteHandler = (str: string) => {
         const headers = { Authorization: `Bearer ${Token}` };
         Axios.post(
-            'http://localhost:9000/notes',
+            `${backendURL}/notes`,
             {
                 content: str,
                 listID: props.list.ID,
@@ -127,7 +128,7 @@ const ListItem: FC<IListItem> = (props) => {
     const updateListTitleHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         dispatch(updateListTitle(props.list.ID, e.target.value));
         Axios.patch(
-            'http://localhost:9000/lists',
+            `${backendURL}/lists`,
             {
                 listID: props.list.ID,
                 newTitle: e.target.value,
@@ -139,7 +140,7 @@ const ListItem: FC<IListItem> = (props) => {
     };
 
     const deleteNoteHandler = () => {
-        Axios.delete(`http://localhost:9000/lists/${props.list.ID}`, {
+        Axios.delete(`${backendURL}/lists/${props.list.ID}`, {
             headers,
         })
             .then((res) => dispatch(deleteList(props.list.ID)))
@@ -157,7 +158,7 @@ const ListItem: FC<IListItem> = (props) => {
         const card_id = e.dataTransfer.getData('card_id');
         dispatch(dragNote(card_id, props.list.ID));
         Axios.patch(
-            'http://localhost:9000/notes',
+            `${backendURL}/notes`,
             {
                 cardID: card_id,
                 listID: props.list.ID,
@@ -198,7 +199,7 @@ const ListItem: FC<IListItem> = (props) => {
             </InputWrapper>
             <SecondWrapper onDrop={dropHandler} numberOfItems={myNotes.length}>
                 {myNotes.map((note) => (
-                    <SingleNote note={note} />
+                    <SingleNote key={note.ID} note={note} />
                 ))}
                 <ItemForm
                     textValue="Add note"

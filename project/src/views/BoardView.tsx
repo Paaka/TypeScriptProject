@@ -12,10 +12,10 @@ import FormForList from '../components/molecules/FormForLists';
 import allColors from '../constants/allColors';
 import ListItem from '../components/organisms/ListItem';
 import BoardsList from '../components/molecules/BoardsList';
-import BoardFormModal from '../components/organisms/BoardFormModal';
 import Axios from 'axios';
 import { addList, addNote, updateBoardTitle } from '../actions';
 import Spinner from '../components/atoms/Spinner/Spinner';
+import { backendURL } from '../constants/url';
 
 interface IWrapper {
     width: number;
@@ -46,7 +46,7 @@ const BoardView = () => {
 
     useEffect(() => {
         const headers = { Authorization: `Bearer ${Token}` };
-        Axios.get(`http://localhost:9000/lists`, { headers })
+        Axios.get(`${backendURL}/lists`, { headers })
             .then((res) => {
                 const arr: Array<any> = res.data;
                 if (lists.length < arr.length) {
@@ -58,7 +58,7 @@ const BoardView = () => {
                 }
             })
             .then((res) => {
-                return Axios.get(`http://localhost:9000/notes`, { headers });
+                return Axios.get(`${backendURL}/notes`, { headers });
             })
             .then((res) => {
                 const arr: Array<any> = res.data;
@@ -92,7 +92,7 @@ const BoardView = () => {
     const updateTitle = (newTitle: string) => {
         dispatch(updateBoardTitle(dashID, newTitle));
         Axios.patch(
-            'http://localhost:9000/Boards',
+            `${backendURL}/Boards`,
             {
                 boardID: dashID,
                 newTitle,
@@ -125,7 +125,6 @@ const BoardView = () => {
                         }
                     })}
                     <FormForList owner={dashID} token={Token} />
-                    <BoardFormModal />
                 </ColumnWrapper>
             )}
         </MainTemplate>

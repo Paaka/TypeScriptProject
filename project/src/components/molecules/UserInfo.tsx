@@ -2,7 +2,6 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 import allColors from '../../constants/allColors';
 import SettingsInput from '../atoms/SettingsInput';
-import { IUser } from '../../models/User';
 
 const Wrapper = styled.div`
     width: 40%;

@@ -13,6 +13,7 @@ import styled from 'styled-components';
 import allColors from '../constants/allColors';
 import StyledH1 from '../components/atoms/Typography/StyledH1';
 import UserInfo from '../components/molecules/UserInfo';
+import { backendURL } from '../constants/url';
 
 interface ISettingsView {}
 
@@ -81,7 +82,7 @@ const SettingsView: FC<ISettingsView> = () => {
 
     const logOutHandler = () => {
         const headers = { Authorization: `Bearer ${Token}` };
-        Axios.post('http://localhost:9000/users/logout', {}, { headers })
+        Axios.post(`${backendURL}/users/logout`, {}, { headers })
             .then((res) => dispatch(logOutUser()))
             .catch((err) => console.log(err));
     };

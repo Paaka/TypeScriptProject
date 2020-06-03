@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import allColors from '../../constants/allColors';
+
 const Wrapper = styled.div`
     display: flex;
     width: 20vw;
