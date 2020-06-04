@@ -4,6 +4,7 @@ export interface INote {
     content: string;
     priority: number;
     description: string;
+    deadline: string;
 }
 
 class Note implements INote {
@@ -12,6 +13,7 @@ class Note implements INote {
     content: string;
     priority: number;
     description: string;
+    deadline: string;
 
     constructor(
         id: string,
@@ -25,6 +27,7 @@ class Note implements INote {
         this.content = text;
         this.priority = priority;
         this.description = des;
+        this.deadline = '';
     }
 }
 export default Note;

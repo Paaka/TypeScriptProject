@@ -97,6 +97,9 @@ const ListItem: FC<IListItem> = (props) => {
 
     const allNotes = useSelector((state) => state.notes);
     const myNotes = allNotes.filter((note) => note.ListID === props.list.ID);
+    const sortedNotes = myNotes.sort((a, b) => {
+        return b.priority - a.priority;
+    });
     const Token = useSelector((state) => state.token);
 
     const headers = { Authorization: `Bearer ${Token}` };
@@ -198,7 +201,7 @@ const ListItem: FC<IListItem> = (props) => {
                 ></ButtonIcon>
             </InputWrapper>
             <SecondWrapper onDrop={dropHandler} numberOfItems={myNotes.length}>
-                {myNotes.map((note) => (
+                {sortedNotes.map((note) => (
                     <SingleNote key={note.ID} note={note} />
                 ))}
                 <ItemForm

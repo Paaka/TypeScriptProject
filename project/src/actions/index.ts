@@ -144,3 +144,13 @@ export const logOutUser = () => {
         type: types.LOGOUT_USER,
     };
 };
+
+export const setNoteDeadline = (noteID: string, newDeadline: string) => {
+    return {
+        type: types.SET_NOTE_DEADLINE,
+        payload: {
+            noteID,
+            newDeadline,
+        },
+    };
+};

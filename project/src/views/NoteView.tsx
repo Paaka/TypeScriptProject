@@ -15,6 +15,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import ButtonIcon from '../components/atoms/Buttons/ButtonIcon';
 import MainInput from '../components/atoms/MainInput';
 import {
+    setNoteDeadline,
     updateNoteTitle,
     deleteNote,
     changeNoteImportance,
@@ -88,6 +89,10 @@ const NotesView = () => {
     const Note = Notes.find((note) => note.ID === noteID);
     const list = Lists.find((list) => list.ID === Note?.ListID);
 
+    const [dateOfExecution, setDateOfExecution] = useState(
+        Note?.deadline || ''
+    );
+
     const noteTitleHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         dispatch(updateNoteTitle(noteID, e.target.value));
         Axios.patch(
@@ -97,6 +102,18 @@ const NotesView = () => {
         )
             .then((res) => console.log())
             .catch((err) => console.log());
+    };
+
+    const updateDateHandler = () => {
+        Axios.patch(
+            `${backendURL}/notes`,
+            { cardID: noteID, deadline: dateOfExecution },
+            { headers }
+        )
+            .then((res) =>
+                console.log(setNoteDeadline(noteID, dateOfExecution))
+            )
+            .catch((res) => console.log(res));
     };
 
     const deleteNoteHandler = () => {
@@ -189,13 +206,28 @@ const NotesView = () => {
                             width={25}
                             imagePath={require('../assets/SVGs/product.svg')}
                         />
-
                         <StyledH2>Description :</StyledH2>
                     </FlexW>
                     <Description
                         initialValue={Note?.description || ''}
                         onClickFn={saveDescription}
                     />
+                    <FlexW>
+                        <DivImage
+                            height={25}
+                            width={25}
+                            imagePath={require('../assets/SVGs/product.svg')}
+                        />
+                        <StyledH2>Set due date :</StyledH2>
+                    </FlexW>
+                    <input
+                        value={dateOfExecution}
+                        type="date"
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                            setDateOfExecution(e.target.value)
+                        }
+                    ></input>
+                    <button onClick={updateDateHandler}>Save</button>
                     <button onClick={deleteNoteHandler}>Usuń notatke</button>
                 </Wrapper>
             </BackgroundWrapper>
