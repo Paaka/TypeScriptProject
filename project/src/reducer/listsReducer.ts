@@ -69,7 +69,8 @@ const listsReducer = (state = initialState, action: any) => {
                         action.payload.listID,
                         action.payload.content,
                         action.payload.priority,
-                        action.payload.description
+                        action.payload.description,
+                        action.payload.deadline
                     ),
                 ],
             };

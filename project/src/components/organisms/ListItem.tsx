@@ -121,7 +121,8 @@ const ListItem: FC<IListItem> = (props) => {
                         res.data.listID,
                         res.data.content,
                         res.data.priority,
-                        res.data.description
+                        res.data.description,
+                        res.data.deadline
                     )
                 )
             )

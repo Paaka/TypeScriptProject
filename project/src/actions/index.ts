@@ -26,7 +26,8 @@ export const addNote = (
     listID: string,
     content: string,
     priority: number,
-    description: string
+    description: string,
+    deadline: string
 ) => {
     return {
         type: types.ADD_NOTE,
@@ -36,6 +37,7 @@ export const addNote = (
             content,
             priority,
             description,
+            deadline,
         },
     };
 };

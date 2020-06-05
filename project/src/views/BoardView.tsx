@@ -70,7 +70,8 @@ const BoardView = () => {
                                 note.listID,
                                 note.content,
                                 note.priority,
-                                note.description
+                                note.description,
+                                note.deadline
                             )
                         )
                     );

@@ -20,14 +20,15 @@ class Note implements INote {
         listID: string,
         text: string,
         priority: number,
-        des: string
+        des: string,
+        deadline: string
     ) {
         this.ID = id;
         this.ListID = listID;
         this.content = text;
         this.priority = priority;
         this.description = des;
-        this.deadline = '';
+        this.deadline = deadline;
     }
 }
 export default Note;
