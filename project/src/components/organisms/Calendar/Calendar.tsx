@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import {
     useSelector as useReduxSelector,
     TypedUseSelectorHook,
@@ -7,9 +7,15 @@ import {
 import { RootState } from '../../../store/index';
 import styled from 'styled-components';
 import allColors from '../../../constants/allColors';
+import { INote } from '../../../models/Note';
+import StyledParagraph from '../../atoms/Typography/StyledParagraph';
 
 interface Column {
     row: number;
+}
+
+interface ICalendar {
+    notes: INote[];
 }
 
 const Wrapper = styled.div`
@@ -25,6 +31,10 @@ const Wrapper = styled.div`
 
 const LeftColumnItem = styled.div<Column>`
     grid-row: ${(props) => props.row};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: ${allColors.green};
 `;
 
 const DayHeader = styled.div`
@@ -37,10 +47,13 @@ const DayHeader = styled.div`
     color: white;
 `;
 
-const Calendar = () => {
-    const useSelector: TypedUseSelectorHook<RootState> = useReduxSelector;
+const DeadlineItem = styled.div`
+    background-color: white;
+    width: 100%;
+    height: 100%;
+`;
 
-    const notes = useSelector((state) => state.notes);
+const Calendar: FC<ICalendar> = ({ notes }) => {
     const nextDays: Array<Date> = [];
     const today = new Date();
     nextDays.push(today);
@@ -70,7 +83,20 @@ const Calendar = () => {
             {nextDays.map((day, index) => (
                 <DayHeader key={index}>{getCorrectDayFormat(day)}</DayHeader>
             ))}
-            {console.log(notes)}
+            {notes.map((note, index) => (
+                <>
+                    <LeftColumnItem row={index + 2}>
+                        <StyledParagraph color="white">
+                            {note.content}
+                        </StyledParagraph>
+                    </LeftColumnItem>
+                    <DeadlineItem></DeadlineItem>
+                    <DeadlineItem></DeadlineItem>
+                    <DeadlineItem></DeadlineItem>
+                    <DeadlineItem></DeadlineItem>
+                    <DeadlineItem></DeadlineItem>
+                </>
+            ))}
         </Wrapper>
     );
 };
