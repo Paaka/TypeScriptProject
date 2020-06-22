@@ -3,12 +3,14 @@ import {
     useSelector as useReduxSelector,
     TypedUseSelectorHook,
 } from 'react-redux';
-
+import { IBoard } from '../../../models/Board';
 import { RootState } from '../../../store/index';
 import styled from 'styled-components';
 import allColors from '../../../constants/allColors';
 import { INote } from '../../../models/Note';
 import StyledParagraph from '../../atoms/Typography/StyledParagraph';
+import { Link } from 'react-router-dom';
+import { IList } from '../../../models/List';
 
 interface Column {
     row: number;
@@ -30,11 +32,17 @@ const Wrapper = styled.div`
 `;
 
 const LeftColumnItem = styled.div<Column>`
+    height: 100%;
     grid-row: ${(props) => props.row};
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: ${allColors.green};
+    transition: all 0.2s;
+
+    &:hover {
+        background-color: ${allColors.greenBlue};
+    }
 `;
 
 const DayHeader = styled.div`
@@ -58,6 +66,10 @@ const Calendar: FC<ICalendar> = ({ notes }) => {
     const today = new Date();
     nextDays.push(today);
 
+    const useSelector: TypedUseSelectorHook<RootState> = useReduxSelector;
+    const boards: Array<IBoard> = useSelector((state) => state.dashboards);
+    const lists: Array<IList> = useSelector((state) => state.lists);
+
     const getNextFourDays = (today: Date) => {
         for (let i = 1; i <= 4; i++) {
             const newDay = new Date();
@@ -75,6 +87,13 @@ const Calendar: FC<ICalendar> = ({ notes }) => {
                 ${formatWithZero(day.getDate())}.${formatWithZero(month)}`;
     };
 
+    const getNoteLink = (noteId: string, listId: string) => {
+        const [{ dashboardID }] = lists.filter((list) => list.ID === listId);
+        const [{ id }] = boards.filter(({ id }) => id === dashboardID);
+
+        return `/Boards/${id}/${noteId}`;
+    };
+
     getNextFourDays(today);
 
     return (
@@ -85,16 +104,19 @@ const Calendar: FC<ICalendar> = ({ notes }) => {
             ))}
             {notes.map((note, index) => (
                 <>
-                    <LeftColumnItem row={index + 2}>
-                        <StyledParagraph color="white">
-                            {note.content}
-                        </StyledParagraph>
-                    </LeftColumnItem>
-                    <DeadlineItem></DeadlineItem>
-                    <DeadlineItem></DeadlineItem>
-                    <DeadlineItem></DeadlineItem>
-                    <DeadlineItem></DeadlineItem>
-                    <DeadlineItem></DeadlineItem>
+                    <Link
+                        to={getNoteLink(note.ID, note.ListID)}
+                        style={{ textDecoration: 'none' }}
+                    >
+                        <LeftColumnItem row={index + 2}>
+                            <StyledParagraph color="white">
+                                {note.content}
+                            </StyledParagraph>
+                        </LeftColumnItem>
+                    </Link>
+                    {nextDays.map((day) => (
+                        <DeadlineItem onClick={() => console.log(note)} />
+                    ))}
                 </>
             ))}
         </Wrapper>

@@ -63,9 +63,9 @@ const SingleNote: FC<ISingleNote> = (props) => {
 
     return (
         <Wrapper
-            onClick={() =>
-                History.push(`${location.pathname}/${props.note.ID}`)
-            }
+            onClick={() => {
+                History.push(`Notes/${props.note.ID}`);
+            }}
             draggable="true"
             id={props.note.ID}
             onDragStart={dragHandler}

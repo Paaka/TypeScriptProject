@@ -84,7 +84,7 @@ const NotesView = () => {
     const headers = { Authorization: `Bearer ${Token}` };
 
     const locationArray = location.pathname.split('/');
-    const noteID = locationArray[3];
+    const noteID = locationArray[2];
 
     const Note = Notes.find((note) => note.ID === noteID);
     const list = Lists.find((list) => list.ID === Note?.ListID);
