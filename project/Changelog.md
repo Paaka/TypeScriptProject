@@ -1,3 +1,9 @@
+## V.0.3.2 June 30,2020
+
+**Added**
+
+-   Error handling for login view.
+
 ## V.0.3.1 June 1,2020
 
 **Added**

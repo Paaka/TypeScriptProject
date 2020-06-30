@@ -198,6 +198,22 @@ const listsReducer = (state = initialState, action: any) => {
                 }),
             };
         }
+        case types.SET_NOTE_DEADLINE: {
+            return {
+                ...state,
+                notes: state.notes.map((note) => {
+                    const deadline: string = action.payload.newDeadline;
+                    if (note.ID === action.payload.noteID) {
+                        return {
+                            ...note,
+                            deadline,
+                        };
+                    } else {
+                        return note;
+                    }
+                }),
+            };
+        }
         default:
             return state;
     }

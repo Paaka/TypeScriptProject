@@ -8,6 +8,11 @@ import LoginInput from './LoginInput';
 import LoginParagrph from './LoginParagraph';
 import Axios from 'axios';
 import { backendURL } from '../../../constants/url';
+import UserMessage from '../../atoms/UserMessage/UserMessage';
+
+interface IError {
+    visible: boolean;
+}
 
 const LoginWrapper = styled.div`
     height: 70vh;
@@ -32,14 +37,14 @@ const StyledParagraph = styled.div`
 
 const BottomWrapper = styled.div`
     display: flex;
+    align-self: center;
     flex-direction: column;
     align-items: center;
     height: 70%;
-    width: 100%;
 `;
 
 const StyledButton = styled.button`
-    width: 90%;
+    width: 100%;
     padding: 5px 0px;
     border: none;
     background-color: ${allColors.lightBlue};
@@ -50,9 +55,14 @@ const StyledButton = styled.button`
     margin-top: 10px;
     text-transform: uppercase;
     transition: background-color 0.2s;
+    outline: none;
 
     :hover {
         background-color: ${allColors.mediumBlue};
+    }
+
+    :active {
+        outline: none;
     }
 `;
 
@@ -60,6 +70,9 @@ const LoginForm = () => {
     const dispatch = useDispatch();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [isUserMessageVisible, setIsUserMessageVisible] = useState(false);
+    const [isLoginSuccessful, setIsLoginSuccessful] = useState(false);
+    const [userMessage, setUserMessage] = useState('Login successfully');
 
     const getEmail = (val: string) => {
         setEmail(val);
@@ -77,11 +90,22 @@ const LoginForm = () => {
             password,
         })
             .then((res) => {
-                if (res.data.token) {
-                    dispatch(logInUser(res.data.user, res.data.token));
-                }
+                setIsUserMessageVisible(true);
+                setIsLoginSuccessful(true);
+                setUserMessage('Login successfully');
+                return res;
             })
-            .catch((err) => console.log(err));
+            .then((res) => {
+                setTimeout(() => {
+                    if (res.data.token) {
+                        dispatch(logInUser(res.data.user, res.data.token));
+                    }
+                }, 1000);
+            })
+            .catch((err) => {
+                setIsUserMessageVisible(true);
+                setUserMessage('Incorrect email or password');
+            });
     };
 
     return (
@@ -120,6 +144,11 @@ const LoginForm = () => {
                     />
                     <StyledButton type="submit">LogIn</StyledButton>
                 </form>
+                <UserMessage
+                    success={isLoginSuccessful}
+                    visible={isUserMessageVisible}
+                    message={userMessage}
+                ></UserMessage>
             </BottomWrapper>
         </LoginWrapper>
     );

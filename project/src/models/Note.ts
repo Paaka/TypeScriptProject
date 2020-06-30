@@ -1,10 +1,12 @@
+import { isNull } from 'util';
+
 export interface INote {
     ID: string;
     ListID: string;
     content: string;
     priority: number;
     description: string;
-    deadline: string;
+    deadline: string | null;
 }
 
 class Note implements INote {
@@ -13,7 +15,7 @@ class Note implements INote {
     content: string;
     priority: number;
     description: string;
-    deadline: string;
+    deadline: string | null;
 
     constructor(
         id: string,

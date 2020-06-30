@@ -11,6 +11,7 @@ import { INote } from '../../../models/Note';
 import StyledParagraph from '../../atoms/Typography/StyledParagraph';
 import { Link } from 'react-router-dom';
 import { IList } from '../../../models/List';
+import { isNull } from 'util';
 
 interface Column {
     row: number;
@@ -18,6 +19,10 @@ interface Column {
 
 interface ICalendar {
     notes: INote[];
+}
+
+interface IDeadlineItem {
+    hasDeadline: boolean;
 }
 
 const Wrapper = styled.div`
@@ -55,8 +60,8 @@ const DayHeader = styled.div`
     color: white;
 `;
 
-const DeadlineItem = styled.div`
-    background-color: white;
+const DeadlineItem = styled.div<IDeadlineItem>`
+    background-color: ${({ hasDeadline }) => (hasDeadline ? 'red' : 'white')};
     width: 100%;
     height: 100%;
 `;
@@ -96,6 +101,17 @@ const Calendar: FC<ICalendar> = ({ notes }) => {
 
     getNextFourDays(today);
 
+    const setDeadline = (day: Date, note: INote) => {
+        if (!isNull(note.deadline)) {
+            const ISODateFormat = note.deadline.substring(0, 10);
+            const deadline = new Date(ISODateFormat);
+            return deadline > day;
+        }
+        return false;
+    };
+
+    const setDeadlineHandler = (day: Date, note: INote) => {};
+
     return (
         <Wrapper>
             <DayHeader> Tasks: </DayHeader>
@@ -115,7 +131,10 @@ const Calendar: FC<ICalendar> = ({ notes }) => {
                         </LeftColumnItem>
                     </Link>
                     {nextDays.map((day) => (
-                        <DeadlineItem onClick={() => console.log(note)} />
+                        <DeadlineItem
+                            hasDeadline={setDeadline(day, note)}
+                            onClick={() => setDeadlineHandler(day, note)}
+                        />
                     ))}
                 </>
             ))}

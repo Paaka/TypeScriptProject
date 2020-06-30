@@ -63,6 +63,7 @@ const BoardView = () => {
             .then((res) => {
                 const arr: Array<any> = res.data;
                 if (allNotes.length < arr.length) {
+                    console.log(arr);
                     arr.forEach((note) =>
                         dispatch(
                             addNote(

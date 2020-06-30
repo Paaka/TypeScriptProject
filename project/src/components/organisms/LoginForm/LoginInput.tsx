@@ -14,7 +14,7 @@ interface ILoginInput {
 }
 
 const Wrapper = styled.div`
-    width: 90%;
+    width: 100%;
     border-bottom: 2px solid ${allColors.grey};
     padding-bottom: 10px;
     margin-bottom: 15px;
