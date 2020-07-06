@@ -110,9 +110,7 @@ const NotesView = () => {
             { cardID: noteID, deadline: dateOfExecution },
             { headers }
         )
-            .then((res) =>
-                console.log(setNoteDeadline(noteID, dateOfExecution))
-            )
+            .then((res) => dispatch(setNoteDeadline(noteID, dateOfExecution)))
             .catch((res) => console.log(res));
     };
 
@@ -218,7 +216,7 @@ const NotesView = () => {
                             width={25}
                             imagePath={require('../assets/SVGs/product.svg')}
                         />
-                        <StyledH2>Set due date :</StyledH2>
+                        <StyledH2>Set deadline :</StyledH2>
                     </FlexW>
                     <input
                         value={dateOfExecution}
